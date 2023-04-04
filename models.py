@@ -12,7 +12,8 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 db = SQLAlchemy(app)
 
 # create an intermediate table for many to many relationship between the banks and top_rated tables
-banks_top_rated = db.Table('banks_top_rated', db.Column('bank_id', db.Integer, db.ForeignKey('banks.id')), db.Column('top_rated_id', db.Integer, db.ForeignKey('top_rated.top_rated_id')))
+banks_top_rated = db.Table('banks_top_rated', db.Column('bank_id', db.Integer, db.ForeignKey('banks.id')),
+                           db.Column('top_rated_id', db.Integer, db.ForeignKey('top_rated.top_rated_id')))
 
 
 class Banks(db.Model):
@@ -23,6 +24,18 @@ class Banks(db.Model):
 
     # many to many relationship with top_rated table
     top_rated_bank = db.relationship('Top_rated', secondary=banks_top_rated, backref='bank')
+
+    # one to one relationship with services table
+    services = db.relationship('Services', backref='banks', uselist=False)
+
+    # one to one relationship with bank reputation table
+    bank_reputation = db.relationship('Bank_Reputation', backref='banks', uselist=False)
+
+    # one to one relationship with application features table
+    application_features = db.relationship('Application_Features', backref='banks', uselist=False)
+
+    # one to one relationship with accessibility table
+    accessibility = db.relationship('Accessibility', backref='banks', uselist=False)
 
     def __init__(self, bank_name):
         self.bank_name = bank_name
@@ -60,7 +73,7 @@ class Services(db.Model):
         self.mortgages = mortgages
 
 
-class Bank_reputation(db.Model):
+class Bank_Reputation(db.Model):
     __tablename__ = 'bank_reputation'
 
     reputation_id = db.Column("rep_id", db.Integer, primary_key=True)
