@@ -11,12 +11,18 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 db = SQLAlchemy(app)
 
+# create an intermediate table for many to many relationship between the banks and top_rated tables
+banks_top_rated = db.Table('banks_top_rated', db.Column('bank_id', db.Integer, db.ForeignKey('banks.id')), db.Column('top_rated_id', db.Integer, db.ForeignKey('top_rated.top_rated_id')))
+
 
 class Banks(db.Model):
     __tablename__ = 'banks'
 
     id = db.Column("id", db.Integer, primary_key=True)
     bank_name = db.Column("bank_name", db.String, nullable=False)
+
+    # many to many relationship with top_rated table
+    top_rated_bank = db.relationship('Top_rated', secondary=banks_top_rated, backref='bank')
 
     def __init__(self, bank_name):
         self.bank_name = bank_name
@@ -26,12 +32,10 @@ class Top_Rated(db.Model):
     __tablename__ = 'top_rated'
 
     top_rated_id = db.Column("top_rated_id", db.Integer, primary_key=True)
-    bank_id = db.Column(db.Integer, db.ForeignKey(Banks.id), nullable=False)
     service = db.Column('service', db.String, nullable=False)
     overview = db.Column('overview', db.String, nullable=False)
 
-    def __init__(self, bank_id, service, overview):
-        self.bank_id = bank_id
+    def __init__(self, service, overview):
         self.service = service
         self.overview = overview
 
