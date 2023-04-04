@@ -11,6 +11,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 db = SQLAlchemy(app)
 
+
 class Banks(db.Model):
     __tablename__ = 'banks'
 
@@ -54,11 +55,66 @@ class Services(db.Model):
         self.isa = isa
         self.mortgages = mortgages
 
+
 class Bank_reputation(db.Model):
     __tablename__ = 'bank_reputation'
 
-    reputation_id = db.Column("services_id", db.Integer, primary_key=True)
+    reputation_id = db.Column("rep_id", db.Integer, primary_key=True)
+    bank_id = db.Column(db.Integer, db.ForeignKey(Banks.id), nullable=False)
+    overall_service = db.Column('overall_service', db.Integer, nullable=True)
+    online_service = db.Column('online_service', db.Integer, nullable=True)
+    overdraft_service = db.Column('overdraft_service', db.Integer, nullable=True)
+    branch_service = db.Column('branch_service', db.Integer, nullable=True)
+    esg_rating = db.Column('esg_rating', db.Integer, nullable=True)
 
+    def __init__(self, bank_id, overall_service, online_service, overdraft_service, branch_service, esg_rating):
+        self.bank_id = bank_id
+        self.overall_service = overall_service
+        self.online_service = online_service
+        self.overdraft_service = overdraft_service
+        self.branch_service = branch_service
+        self.esg_rating = esg_rating
+
+
+class Application_Features(db.Model):
+    __tablename__ = 'application_features'
+
+    application_feature_id = db.Column("app_feat_id", db.Integer, primary_key=True)
+    bank_id = db.Column(db.Integer, db.ForeignKey(Banks.id), nullable=False)
+    freeze_card = db.Column('freeze_card', db.String, nullable=False)
+    spending_notifications = db.Column('spending_notifications', db.String, nullable=False)
+    spending_categories = db.Column('spending_categories', db.String, nullable=False)
+    turn_off_certain_spending = db.Column('turn_off_certain_spending', db.String, nullable=False)
+    budgeting_goals = db.Column('budgeting_goals', db.String, nullable=False)
+
+    def __init__(self, bank_id, freeze_card, spending_notifications, spending_categories, turn_off_certain_spending,
+                 budgeting_goals):
+        self.bank_id = bank_id
+        self.freeze_card = freeze_card
+        self.spending_notifications = spending_notifications
+        self.spending_categories = spending_categories
+        self.turn_off_certain_spending = turn_off_certain_spending
+        self.budgeting_goals = budgeting_goals
+
+
+class Accessibility(db.Model):
+    __tablename__ = 'accessibility'
+
+    accessibility_id = db.Column("accessibility", db.Integer, primary_key=True)
+    bank_id = db.Column(db.Integer, db.ForeignKey(Banks.id), nullable=False)
+    branches = db.Column("branches", db.Integer, nullable=False)
+    atm_limit = db.Column("atm_limit", db.Integer, nullable=False)
+    online_services = db.Column("online_services", db.String, nullable=False)
+    mobile_services = db.Column("mobile_services", db.String, nullable=False)
+    minimum_age = db.Column("minimum_age", db.String, nullable=False)
+
+    def __init__(self, bank_id, branches, atm_limit, online_services, mobile_services, minimum_age):
+        self.bank_id = bank_id
+        self.branches = branches
+        self.atm_limit = atm_limit
+        self.online_services = online_services
+        self.mobile_services = mobile_services
+        self.minimum_age = minimum_age
 
 
 def init_db():
