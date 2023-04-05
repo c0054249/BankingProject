@@ -16,6 +16,11 @@ db = SQLAlchemy(app)
 def index():  # put application's code here
     return render_template('index.html', current_user=current_user)
 
+# import blueprint
+from search_algorithm.views import search_algorithm_blueprint
+
+# register blueprint with app
+app.register_blueprint(search_algorithm_blueprint)
 
 if __name__ == '__main__':
     app.run()
