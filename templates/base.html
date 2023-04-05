@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Bank for you</title>
+    <link rel="icon" href="../static/Earth.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-tooltip@3.0.2/dist/css/bulma-tooltip.min.css">
+</head>
+
+
+<body style="background-color:#FFFFFF">
+<div class="hero-head has-navbar-fixed-top">
+    <nav class="navbar is-dark is-fixed-top">
+      <div class="navbar-brand">
+              <a class="navbar-item has-tooltip-bottom" data-tooltip="Click to go home" href="/">
+                <span class="icon">
+                    <i class="fas fa-home"></i>
+                </span>
+              </a>
+        <div class="navbar-burger" data-target="navbarA">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="navbarA" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                <span class="icon">
+                    <i class="fas fa-search"></i>
+                </span>
+                <span>
+                    Find a bank
+                </span>
+            </a>
+
+        </div>
+
+        <div class="navbar-end">
+
+            <div class="navbar-item">
+            <div class="field is-grouped">
+              <div class="field is-grouped">
+              <p class="control">
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                      <span class="icon">
+                        <i class="fas fa-list-ul"></i>
+                      </span>
+                      <span>
+                        Guide
+                      </span>
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            How to chose a bank
+                        </a>
+                        <a class="navbar-item">
+                            Search algorithm overview
+                        </a>
+                        <a class="navbar-item">
+                            Terminology
+                        </a>
+                    </div>
+                  </div>
+              </p>
+              <p class="control">
+                <a class="button is-info">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                  <span>About</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </nav>
+    <br><br><br>
+
+
+    <script src="../static/nav.js"></script>
+    <section class="hero is-fullheight">
+        <div class="hero-body is-fullheight">
+            <div class="container has-text-centered is-fullheight">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer pb-0">
+      <div class="container">
+        <div class="content has-text-centered">
+          <div class="soc">
+            <span class="has-tooltip-arrow" data-tooltip="GitHub"><a href="https://github.com/c0054249/BankingProject"><i class="fab fa-github" style="color:black" aria-hidden="true"></i></a></span>
+          </div>
+          <p>
+              <strong>The bank for you</strong>™ by <strong>Hugo Ross-Wilson</strong>.<br>
+          </p>
+        </div>
+      </div>
+    </footer>
+</div>
+</body>
+</html>
