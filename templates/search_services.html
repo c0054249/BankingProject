@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>What services do you require from your bank?</title>
+      </head>
+      <body>
+        <h1>What services do you require from your bank?</h1>
+        <br><br>
+        <form method="POST" action="/submit">
+          <label for="current_account">Current account?</label>
+          <br>
+          <input type="radio" id="current_account_yes" name="current_account" value="yes">
+          <label for="current_account_yes">Yes</label>
+          <input type="radio" id="current_account_no" name="current_account" value="no">
+          <label for="current_account_no">No</label>
+          <br><br>
+
+          <label for="savings_account">Savings account?</label>
+          <br>
+          <input type="radio" id="savings_account_yes" name="savings_account" value="yes">
+          <label for="savings_account_yes">Yes</label>
+          <input type="radio" id="savings_account_no" name="savings_account" value="no">
+          <label for="savings_account_no">No</label>
+          <br><br>
+
+          <label for="credit_card">Credit card?</label>
+          <br>
+          <input type="radio" id="credit_card_yes" name="credit_card" value="yes">
+          <label for="credit_card_yes">Yes</label>
+          <input type="radio" id="credit_card_no" name="credit_card" value="no">
+          <label for="credit_card_no">No</label>
+          <br><br>
+
+          <label for="isa">ISA?</label>
+          <br>
+          <input type="radio" id="isa_yes" name="isa" value="yes">
+          <label for="isa_yes">Yes</label>
+          <input type="radio" id="isa_no" name="isa" value="no">
+          <label for="isa_no">No</label>
+          <br><br>
+
+          <label for="mortgage">Mortgage?</label>
+          <br>
+          <input type="radio" id="mortgage_yes" name="mortgage" value="yes">
+          <label for="mortgage_yes">Yes</label>
+          <input type="radio" id="mortgage_no" name="mortgage" value="no">
+          <label for="mortgage_no">No</label>
+          <br><br>
+
+          <input type="submit" value="Submit">
+        </form>
+      </body>
+    </html>
+
+{% endblock %}
