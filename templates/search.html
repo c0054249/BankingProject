@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>What services do you require from your bank?</title>
+      </head>
+      <body>
+        <h1>Services</h1>
+        <br><br>
+        <form method="POST" action="/submit">
+          <label for="current_account">Current account?</label>
+          <br>
+          <input type="radio" id="current_account_yes" name="current_account" value="yes">
+          <label for="current_account_yes">Yes</label>
+          <input type="radio" id="current_account_no" name="current_account" value="no">
+          <label for="current_account_no">No</label>
+          <br><br>
+
+          <label for="savings_account">Savings account?</label>
+          <br>
+          <input type="radio" id="savings_account_yes" name="savings_account" value="yes">
+          <label for="savings_account_yes">Yes</label>
+          <input type="radio" id="savings_account_no" name="savings_account" value="no">
+          <label for="savings_account_no">No</label>
+          <br><br>
+
+          <label for="credit_card">Credit card?</label>
+          <br>
+          <input type="radio" id="credit_card_yes" name="credit_card" value="yes">
+          <label for="credit_card_yes">Yes</label>
+          <input type="radio" id="credit_card_no" name="credit_card" value="no">
+          <label for="credit_card_no">No</label>
+          <br><br>
+
+          <label for="isa">ISA?</label>
+          <br>
+          <input type="radio" id="isa_yes" name="isa" value="yes">
+          <label for="isa_yes">Yes</label>
+          <input type="radio" id="isa_no" name="isa" value="no">
+          <label for="isa_no">No</label>
+          <br><br>
+
+          <label for="mortgage">Mortgage?</label>
+          <br>
+          <input type="radio" id="mortgage_yes" name="mortgage" value="yes">
+          <label for="mortgage_yes">Yes</label>
+          <input type="radio" id="mortgage_no" name="mortgage" value="no">
+          <label for="mortgage_no">No</label>
+          <br><br>
+
+          <hr style="border-top: 2px solid #808080">
+
+          <h1>Accessibility</h1>
+            <br><br>
+            <label for="branches">How many branches do you require?</label>
+            <input type="number" id="branches" name="branches" min="0" max="2700" required>
+
+            <br><br>
+
+            <label for="withdrawalLimit">Maximum ATM withdraw limit:</label>
+            <br>
+            <input type="radio" id="limit300" name="withdrawalLimit" value="300">
+            <label for="limit300">300</label>
+            <br>
+            <input type="radio" id="limit400" name="withdrawalLimit" value="400">
+            <label for="limit400">400</label>
+            <br>
+            <input type="radio" id="limit500" name="withdrawalLimit" value="500">
+            <label for="limit500">500</label>
+            <br><br>
+            <label for="online services">Online Services?</label>
+            <br>
+            <input type="radio" id="online_yes" name="online_services" value="yes">
+            <label for="online_yes">Yes</label  >
+            <input type="radio" id="online_no" name="online_services" value="no">
+            <label for="online_no">No</label>
+            <br><br>
+            <label for="mobile services">Mobile Services?</label>
+            <br>
+            <input type="radio" id="mobile_yes" name="mobile_services" value="yes">
+            <label for="mobile_yes">Yes</label  >
+            <input type="radio" id="mobile_no" name="mobile_services" value="no">
+            <label for="mobile_no">No</label>
+            <br><br>
+
+            <hr style="border-top: 2px solid #808080">
+
+            <h1>Application Features</h1>
+            <br><br>
+            <label for="freezeCard">Freeze debit card in app?</label>
+            <input type="radio" id="freezeYes" name="freezeCard" value="yes">
+            <label for="freezeYes">Yes</label>
+            <input type="radio" id="freezeNo" name="freezeCard" value="no">
+            <label for="freezeNo">No</label>
+
+            <br><br>
+
+            <label for="instantNotifications">Instant spending notifications?</label>
+            <input type="radio" id="instantYes" name="instantNotifications" value="yes">
+            <label for="instantYes">Yes</label>
+            <input type="radio" id="instantNo" name="instantNotifications" value="no">
+            <label for="instantNo">No</label>
+
+            <br><br>
+
+            <label for="spendingCategories">Spending categories?</label>
+            <input type="radio" id="spendingCategoriesYes" name="spendingCategories" value="yes">
+            <label for="spendingCategoriesYes">Yes</label>
+            <input type="radio" id="spendingCategoriesNo" name="spendingCategories" value="no">
+            <label for="spendingCategoriesNo">No</label>
+
+            <br><br>
+
+            <label for="turnOffSpending">Turn off certain spending?</label>
+            <input type="radio" id="turnOffYes" name="turnOffSpending" value="yes">
+            <label for="turnOffYes">Yes</label>
+            <input type="radio" id="turnOffNo" name="turnOffSpending" value="no">
+            <label for="turnOffNo">No</label>
+
+            <br><br>
+
+            <label for="spendingGoals">Spending/Budgeting goals?</label>
+            <input type="radio" id="goalsYes" name="spendingGoals" value="yes">
+            <label for="goalsYes">Yes</label>
+            <input type="radio" id="goalsNo" name="spendingGoals" value="no">
+            <label for="goalsNo">No</label>
+
+            <br><br>
+
+
+          <input type="submit" value="Submit">
+        </form>
+      </body>
+    </html>
+
+{% endblock %}
