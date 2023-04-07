@@ -242,6 +242,41 @@
             }
             </style>
 
+            <hr style="border-top: 2px solid #808080">
+
+            <fieldset>
+                <legend>Which bank reputation is most important to you?</legend>
+                <br>
+                <div class="grid-container-2">
+                    <div>
+                        <input type="radio" id="overall" name="reputation" value="Overall">
+                        <label for="overall">Overall</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="online" name="reputation" value="Online">
+                        <label for="online">Online</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="overdraft" name="reputation" value="Overdraft">
+                        <label for="overdraft">Overdraft</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="branch" name="reputation" value="Branch">
+                        <label for="branch">Branch</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <style>
+            .grid-container-2 {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              grid-column-gap: 5px;
+              grid-row-gap: 10px;
+            }
+            </style>
+
+            <hr style="border-top: 2px solid #808080">
 
           <input type="submit" value="Submit">
         </form>
