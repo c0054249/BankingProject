@@ -21,24 +21,47 @@ class Banks(db.Model):
 
     id = db.Column("id", db.Integer, primary_key=True)
     bank_name = db.Column("bank_name", db.String, nullable=False)
+    current_account = db.Column('current_account', db.String, nullable=False)
+    savings_account = db.Column('savings_account', db.String, nullable=False)
+    credit_cards = db.Column('credit_cards', db.String, nullable=False)
+    isa = db.Column('isa', db.String, nullable=False)
+    mortgages = db.Column('mortgages', db.String, nullable=False)
+    branches = db.Column("branches", db.Integer, nullable=False)
+    atm_limit = db.Column("atm_limit", db.Integer, nullable=False)
+    online_services = db.Column("online_services", db.String, nullable=False)
+    mobile_services = db.Column("mobile_services", db.String, nullable=False)
+    minimum_age = db.Column("minimum_age", db.String, nullable=False)
+    overall_service = db.Column('overall_service', db.Integer, nullable=True)
+    online_service = db.Column('online_service', db.Integer, nullable=True)
+    overdraft_service = db.Column('overdraft_service', db.Integer, nullable=True)
+    branch_service = db.Column('branch_service', db.Integer, nullable=True)
+    esg_rating = db.Column('esg_rating', db.Integer, nullable=True)
 
     # many to many relationship with top_rated table
     top_rated_bank = db.relationship('Top_rated', secondary=banks_top_rated, backref='bank')
 
-    # one to one relationship with services table
-    services = db.relationship('Services', backref='banks', uselist=False)
-
-    # one to one relationship with bank reputation table
-    bank_reputation = db.relationship('Bank_Reputation', backref='banks', uselist=False)
-
     # one to one relationship with application features table
     application_features = db.relationship('Application_Features', backref='banks', uselist=False)
 
-    # one to one relationship with accessibility table
-    accessibility = db.relationship('Accessibility', backref='banks', uselist=False)
-
-    def __init__(self, bank_name):
+    def __init__(self, bank_name, current_account, savings_account, credit_cards, isa, mortgages,
+                 branches, atm_limit, online_services, mobile_services, minimum_age, overall_service,
+                 online_service, overdraft_service, branch_service, esg_rating):
         self.bank_name = bank_name
+        self.current_account = current_account
+        self.savings_account = savings_account
+        self.credit_cards = credit_cards
+        self.isa = isa
+        self.mortgages = mortgages
+        self.branches = branches
+        self.atm_limit = atm_limit
+        self.online_services = online_services
+        self.mobile_services = mobile_services
+        self.minimum_age = minimum_age
+        self.overall_service = overall_service
+        self.online_service = online_service
+        self.overdraft_service = overdraft_service
+        self.branch_service = branch_service
+        self.esg_rating = esg_rating
 
 
 class Top_Rated(db.Model):
@@ -53,6 +76,7 @@ class Top_Rated(db.Model):
         self.overview = overview
 
 
+'''
 class Services(db.Model):
     __tablename__ = 'services'
 
@@ -71,8 +95,9 @@ class Services(db.Model):
         self.credit_cards = credit_cards
         self.isa = isa
         self.mortgages = mortgages
+'''
 
-
+'''
 class Bank_Reputation(db.Model):
     __tablename__ = 'bank_reputation'
 
@@ -91,6 +116,7 @@ class Bank_Reputation(db.Model):
         self.overdraft_service = overdraft_service
         self.branch_service = branch_service
         self.esg_rating = esg_rating
+'''
 
 
 class Application_Features(db.Model):
@@ -114,6 +140,7 @@ class Application_Features(db.Model):
         self.budgeting_goals = budgeting_goals
 
 
+'''
 class Accessibility(db.Model):
     __tablename__ = 'accessibility'
 
@@ -132,6 +159,7 @@ class Accessibility(db.Model):
         self.online_services = online_services
         self.mobile_services = mobile_services
         self.minimum_age = minimum_age
+'''
 
 
 def init_db():
