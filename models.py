@@ -30,7 +30,8 @@ class Banks(db.Model):
     atm_limit = db.Column("atm_limit", db.Integer, nullable=False)
     online_services = db.Column("online_services", db.String, nullable=False)
     mobile_services = db.Column("mobile_services", db.String, nullable=False)
-    minimum_age = db.Column("minimum_age", db.String, nullable=False)
+    joint_accounts = db.Column("joint_accounts", db.String, nullable=False)
+    child_accounts = db.Column("child_accounts", db.String, nullable=False)
     overall_service = db.Column('overall_service', db.Integer, nullable=True)
     online_service = db.Column('online_service', db.Integer, nullable=True)
     overdraft_service = db.Column('overdraft_service', db.Integer, nullable=True)
@@ -44,7 +45,7 @@ class Banks(db.Model):
     application_features = db.relationship('Application_Features', backref='banks', uselist=False)
 
     def __init__(self, bank_name, current_account, savings_account, credit_cards, isa, mortgages,
-                 branches, atm_limit, online_services, mobile_services, minimum_age, overall_service,
+                 branches, atm_limit, online_services, mobile_services, joint_accounts, child_accounts, overall_service,
                  online_service, overdraft_service, branch_service, esg_rating):
         self.bank_name = bank_name
         self.current_account = current_account
@@ -56,7 +57,8 @@ class Banks(db.Model):
         self.atm_limit = atm_limit
         self.online_services = online_services
         self.mobile_services = mobile_services
-        self.minimum_age = minimum_age
+        self.joint_accounts = joint_accounts
+        self.child_accounts = child_accounts
         self.overall_service = overall_service
         self.online_service = online_service
         self.overdraft_service = overdraft_service
