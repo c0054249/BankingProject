@@ -28,6 +28,8 @@ def submit():
     withdrawalLimit = int(request.form['withdrawalLimit'])
     online_services = request.form['online_services']
     mobile_services = request.form['mobile_services']
+    joint_accounts = request.form['joint_accounts']
+    child_accounts = request.form['child_accounts']
 
     # application features
     freeze_card = request.form['freezeCard']
@@ -48,6 +50,8 @@ def submit():
     print(f"User selected {withdrawalLimit} for maximum withdrawal limit from atm's")
     print(f"User selected {online_services} for online services")
     print(f"User selected {mobile_services} for mobile services")
+    print(f"User selected {joint_accounts} for joint accounts")
+    print(f"User selected {child_accounts} for child accounts")
     print(f"User selected {freeze_card} for freeze card")
     print(f"User selected {instant_notifications} for instant notifications")
     print(f"User selected {spending_categories} for spending categories")
