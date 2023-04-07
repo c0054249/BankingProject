@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+import sqlite3
 
 search_algorithm_blueprint = Blueprint('search_algorithm', __name__, template_folder='templates')
 
@@ -54,5 +55,31 @@ def submit():
     print(f"User selected {spending_goals} for spending goals")
     print(f"User selected {service} for top rated service")
 
-
     return "Answers submitted successfully!"
+
+
+def return_database():
+    # Connect to the database
+    conn = sqlite3.connect('banks.sqlite3')
+    c = conn.cursor()
+
+    # SQL query to join multiple one-to-one relationship tables
+    query = """
+    SELECT *
+    FROM Banks
+    JOIN Services ON Banks.id = Services.bank_id
+    JOIN Application_Features ON Services.bank_id = Application_features.bank_id
+    """
+
+    # Execute the query with the desired search parameters
+    search_params = ('param1_value', 'param2_value', 'param3_value')
+    c.execute(query, search_params)
+
+    # Fetch the results
+    results = c.fetchall()
+
+    # Print the results
+    print(results)
+
+    # Close the connection
+    conn.close()
