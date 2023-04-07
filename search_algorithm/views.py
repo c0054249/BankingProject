@@ -35,6 +35,9 @@ def submit():
     turn_off_spending = request.form['turnOffSpending']
     spending_goals = request.form['spendingGoals']
 
+    # most important top rated feature
+    service = request.form['service']
+
     print(f"User selected {current_account} for current account")
     print(f"User selected {savings_account} for savings account")
     print(f"User selected {credit_card} for credit card")
@@ -49,6 +52,7 @@ def submit():
     print(f"User selected {spending_categories} for spending categories")
     print(f"User selected {turn_off_spending} for turn off certain spending")
     print(f"User selected {spending_goals} for spending goals")
+    print(f"User selected {service} for top rated service")
 
 
     return "Answers submitted successfully!"
