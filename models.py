@@ -11,9 +11,11 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 db = SQLAlchemy(app)
 
+'''
 # create an intermediate table for many to many relationship between the banks and top_rated tables
 banks_top_rated = db.Table('banks_top_rated', db.Column('bank_id', db.Integer, db.ForeignKey('banks.id')),
                            db.Column('top_rated_id', db.Integer, db.ForeignKey('top_rated.top_rated_id')))
+'''
 
 
 class Banks(db.Model):
@@ -38,8 +40,8 @@ class Banks(db.Model):
     branch_service = db.Column('branch_service', db.Integer, nullable=True)
     esg_rating = db.Column('esg_rating', db.Integer, nullable=True)
 
-    # many to many relationship with top_rated table
-    top_rated_bank = db.relationship('Top_rated', secondary=banks_top_rated, backref='bank')
+    # Define a one-to-many relationship with the Top_Rated table
+    top_rated_items = db.relationship('Top_Rated', backref='bank')
 
     # one to one relationship with application features table
     application_features = db.relationship('Application_Features', backref='banks', uselist=False)
@@ -70,6 +72,7 @@ class Top_Rated(db.Model):
     __tablename__ = 'top_rated'
 
     top_rated_id = db.Column("top_rated_id", db.Integer, primary_key=True)
+    bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
     service = db.Column('service', db.String, nullable=False)
     overview = db.Column('overview', db.String, nullable=False)
 
