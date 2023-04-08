@@ -1,0 +1,17 @@
+﻿app_feat_id,bank_id,freeze_card,spending_notifications,spending_categories,turn_off_certain_spending,budgeting_goals
+1,1,yes,yes,yes,yes,yes
+2,2,yes,yes,yes,yes,yes
+3,3,yes,no,yes,yes,no
+4,4,yes,no,yes,no,no
+5,5,yes,no,no,no,yes
+6,6,yes,yes,yes,yes,yes
+7,7,yes,yes,yes,yes,no
+8,8,yes,no,no,yes,no
+9,9,yes,yes,yes,yes,no
+10,10,no,yes,yes,no,yes
+11,11,yes,yes,no,yes,no
+12,12,yes,yes,yes,yes,yes
+13,13,yes,yes,yes,yes,no
+14,14,no,no,no,no,no
+15,15,no,no,no,no,yes
+16,16,yes,no,yes,yes,yes
