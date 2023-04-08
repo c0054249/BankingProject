@@ -97,3 +97,35 @@ def populate_application_features():
             # Commit the changes and close the connection
             conn.commit()
             conn.close()
+
+
+def populate_top_rated():
+    with app.app_context():
+        # Open the CSV file and read its contents
+        with open('csv files/top_rated.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            # Connect to the database and create a cursor
+            conn = db.session.connection()
+
+            # Iterate through each row in the CSV file and insert it into the database
+            for row in reader:
+                bank_id = row['bank_id']
+                service = row['service']
+                overview = row['overview']
+
+                # Execute the SQL statement with the parameters for the current row
+                conn.execute(sql.text(
+                    'INSERT INTO top_rated (bank_id, service, overview) '
+                    'VALUES (:bank_id, :service, :overview)'),
+                    {'bank_id': bank_id, 'service': service, 'overview': overview})
+
+            # Commit the changes and close the connection
+            conn.commit()
+            conn.close()
+
+
+def init_population():
+    populate_banks()
+    populate_application_features()
+    populate_top_rated()

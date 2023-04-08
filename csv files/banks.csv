@@ -15,3 +15,6 @@
 14,Co-operative bank,yes,yes,yes,yes,yes,373,250,yes,yes,yes,yes,55,61,61,54,8.3
 15,TSB,yes,yes,yes,yes,yes,220,500,yes,yes,yes,yes,49,64,54,53,16.5
 16,RBS,yes,yes,yes,yes,yes,700,1500,yes,yes,yes,yes,46,67,45,48,0
+17,Chase,yes,yes,yes,no,yes,0,0,yes,yes,no,yes,60,60,60,60,29.3
+18,Revolut,yes,yes,yes,no,no,0,0,yes,yes,yes,yes,60,60,60,60,0
+19,Citibank,yes,yes,yes,yes,yes,1,500,yes,yes,yes,yes,60,60,60,60,16.5

@@ -1,0 +1,42 @@
+﻿top_rate_id,bank_id,service,overview
+1,12,Top sign up cash,"Switchers get £200 FREE cash, plus up to £36/year cashback. "
+2,3,Top sign up cash,"FREE £175, TOP service, 7% saver and a £250 0% overdraft."
+3,7,Top sign up cash,FREE £175 + monthly rewards.
+4,8,Cashback,Get 1% cashback on bills and supermarket / travel spending (£3/month fee).
+5,17,Cashback,"Get 1% cashback on most purchases, no fees to spend/withdraw cash abroad, plus 3% interest."
+6,6,Savings Interest,"5.12% interest on £5,000 "
+7,5,Savings Interest,5% fixed interest – but it's only for a year.
+8,2,Savings Interest,"3% interest, 1% cashback + 5% 'round-up' interest."
+9,3,Overdraft,Ongoing £250 interest-free overdraft and TOP service.
+10,5,Overdraft,"A year's interest-free overdraft, with a limit up to £1,500."
+11,2,Overdraft,"No 0% overdraft, but a chance of a low interest rate."
+12,5,Packages,Top pick packaged bank account for families
+13,10,Packages,Top for families who want gadget cover too
+14,14,Packages,Good option for older travellers or couples
+15,7,Packages,"Good if you want home emergency cover, plus switchers can get a FREE £175"
+16,11,Premium,Free worldwide family travel insurance with no monthly fee 
+17,19,Premuim,"Free worldwide travel insurance, but high balance needed to keep it fee-free."
+18,2,App based,Not available
+19,1,App based,Not available
+20,17,App based,Not available
+21,12,Traditional bank app,Not available
+22,9,Traditional bank app,Not available
+23,14,Basic bank account,Not available
+24,8,Basic bank account,Not available
+25,10,Basic bank account,Not available
+26,12,Prepaid under 18,"Available for ages 6-16 (max three kids). Limit card usage online, in stores or at ATMs. Set daily, weekly or monthly spending limits. Card management via app only. Money protected a e-money. "
+27,18,Prepaid under 18,Available for ages 6-17. ATM spending limited to £40 per rolling month. Set spending limits. Card management via app only. Money protected as e-money
+28,2,Prepaid under 18,"Available for ages 6-16. Limit card usage at ATMs and on card purchases. Set daily, weekly and monthly spending limits. Card management via app only. Money protected by financial services compensation scheme.  "
+29,11,Child,"MyMoney Account: Interest: 3.75% on £10 up to £3,000. 1.25% above £3,000"
+30,8,Child,"123 mini account: 3% on £1,500 up to £2,000. 2% on £1,000 up to £1,500. 1% on £1 up to £1,000. 0% above £2,000"
+31,15,Child,"Under 19's account: 2.5% on £1 to £2,500. 0.1% above £2,500"
+32,5,Child,"FlexOne Account: 2% on up to £1,000"
+33,3,Existing Customer Savings ,"7% fixed for one year, £300 max monthly deposit, penalty fees for withdrawing early "
+34,9,Existing Customer Savings ,"5.25% fixed for one year, £250 max monthly deposit, can skip months, no penalty fees for withdrawing early "
+35,12,Existing Customer Savings ,"6.17% on up to £5000 fixed for one year, £150 max monthly deposit, can skip months, no penalty fees for withdrawing early "
+36,13,Existing Customer Savings ,"5.5% fixed for one year, £250 max monthly deposit, can skip months, no penalty fees for withdrawing early "
+37,6,Existing Customer Savings ,"5.12% on up to £5000 fixed for one year, no max monthly deposit, can skip months, no penalty fees for withdrawing early "
+38,15,Existing Customer Savings ,"5% fixed for one year, £250 max monthly deposit, can skip months, no penalty fees for withdrawing early "
+39,11,Existing Customer Savings ,"5% fixed for one year, £250 max monthly deposit, £25/month, penalty fees for withdrawing early "
+40,7,Open-To-All Savings ,"5.5% fixed for one year, £250 max monthly deposit, can skip months, penalty fees for withdrawing early "
+41,5,Open-To-All Savings ,"5% fixed for one year, £50 max monthly deposit,  £10/month min , no penalty fees for withdrawing early with 30 day notice "
