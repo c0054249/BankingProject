@@ -1,7 +1,20 @@
-from flask import Blueprint, render_template, request
+from datetime import timedelta
+
+from flask import Blueprint, render_template, request, Flask, current_app
 import sqlite3
 
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
+
 search_algorithm_blueprint = Blueprint('search_algorithm', __name__, template_folder='templates')
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banks.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
+app.permanent_session_lifetime = timedelta(minutes=5)
+
+db = SQLAlchemy(app)
 
 
 @search_algorithm_blueprint.route('/search_home')
@@ -63,31 +76,24 @@ def submit():
     print(f"User selected {service} for top rated service")
     print(f"User selected {reputation} for top rated service")
 
+    return_database()
+
     return "Answers submitted successfully!"
 
 
 def return_database():
-    # Connect to the database
-    conn = sqlite3.connect('banks.sqlite3')
-    c = conn.cursor()
+    with app.app_context():
+        # Get the database connection from the current app context
+        conn = db.session.connection()
 
-    # SQL query to join multiple one-to-one relationship tables
-    query = """
-    SELECT *
-    FROM Banks
-    JOIN Services ON Banks.id = Services.bank_id
-    JOIN Application_Features ON Services.bank_id = Application_features.bank_id
-    """
+        # Create a text query using SQLAlchemy's text() function
+        query = text("SELECT * FROM banks")
 
-    # Execute the query with the desired search parameters
-    search_params = ('param1_value', 'param2_value', 'param3_value')
-    c.execute(query, search_params)
+        # Execute the query and fetch all results as a list of dictionaries
+        results = conn.execute(query).fetchall()
 
-    # Fetch the results
-    results = c.fetchall()
+        # Close the connection
+        conn.close()
 
-    # Print the results
-    print(results)
-
-    # Close the connection
-    conn.close()
+        # Return the query results
+        return results
