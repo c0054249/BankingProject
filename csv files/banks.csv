@@ -1,0 +1,17 @@
+﻿id,bank_name,current_account,savings_account,credit_cards,isa,mortgages,branches,atm_limit,online_services,mobile_services,joint_accounts,child_accounts,overall_service,online_service,overdraft_service,branch_service,esg_rating
+1,Monzo,yes,yes,yes,yes,no,0,400,yes,yes,yes,no,81,84,67,0,0
+2,Starling Bank,yes,yes,yes,yes,no,0,300,yes,yes,yes,yes,81,84,70,0,0
+3,First Direct,yes,yes,yes,no,yes,0,500,yes,yes,yes,no,78,78,72,0,0
+4,Metro bank,yes,yes,yes,yes,yes,78,300,yes,yes,yes,yes,69,71,60,74,28.1
+5,Nationwide,yes,yes,yes,yes,yes,625,500,yes,yes,yes,yes,68,73,60,71,10.2
+6,Barclays,yes,yes,yes,yes,yes,1519,300,yes,yes,yes,yes,65,78,62,60,16.5
+7,Halifax,yes,yes,yes,yes,yes,518,500,yes,yes,yes,yes,64,78,63,70,0
+8,Santander,yes,yes,yes,yes,yes,444,300,yes,yes,yes,yes,56,70,53,62,0
+9,Lloyds,yes,yes,yes,yes,yes,739,500,yes,yes,yes,yes,64,78,61,66,19.5
+10,Virgin Money,yes,yes,yes,yes,yes,131,500,yes,yes,yes,yes,49,64,59,56,17.4
+11,HSBC,yes,yes,yes,yes,yes,2700,300,yes,yes,yes,yes,56,67,58,58,20.4
+12,Natwest,yes,yes,yes,yes,yes,960,250,yes,yes,yes,yes,57,75,52,60,17.4
+13,Bank of Scotland,yes,yes,yes,yes,yes,184,500,yes,yes,yes,yes,61,78,65,71,0
+14,Co-operative bank,yes,yes,yes,yes,yes,373,250,yes,yes,yes,yes,55,61,61,54,8.3
+15,TSB,yes,yes,yes,yes,yes,220,500,yes,yes,yes,yes,49,64,54,53,16.5
+16,RBS,yes,yes,yes,yes,yes,700,1500,yes,yes,yes,yes,46,67,45,48,0

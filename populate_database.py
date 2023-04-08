@@ -28,8 +28,37 @@ def populate_banks():
             # Iterate through each row in the CSV file and insert it into the database
             for row in reader:
                 bank_name = row['bank_name']
+                current_account = row['current_account']
+                savings_account = row['savings_account']
+                credit_cards = row['credit_cards']
+                isa = row['isa']
+                mortgages = row['mortgages']
+                branches = row['branches']
+                atm_limit = row['atm_limit']
+                online_services = row['online_services']
+                mobile_services = row['mobile_services']
+                joint_accounts = row['joint_accounts']
+                child_accounts = row['child_accounts']
+                overall_service = row['overall_service']
+                online_service = row['online_service']
+                overdraft_service = row['overdraft_service']
+                branch_service = row['branch_service']
+                esg_rating = row['esg_rating']
 
-                conn.execute(sql.text('INSERT INTO Banks (bank_name) VALUES (:bank_name)'), {'bank_name': bank_name})
+                conn.execute(sql.text(
+                    'INSERT INTO Banks (bank_name, current_account, savings_account, credit_cards, isa, mortgages, branches, '
+                    'atm_limit, online_services, mobile_services, joint_accounts, child_accounts, overall_service, '
+                    'online_service, overdraft_service, branch_service, esg_rating) VALUES (:bank_name, '
+                    ':current_account, :savings_account, :credit_cards, :isa, :mortgages, :branches, :atm_limit, '
+                    ':online_services, :mobile_services, :joint_accounts, :child_accounts, :overall_service, '
+                    ':online_service, :overdraft_service, :branch_service, :esg_rating)'),
+                             {'bank_name': bank_name, 'current_account': current_account,
+                              'savings_account': savings_account, 'credit_cards': credit_cards, 'isa': isa,
+                              'mortgages': mortgages, 'branches': branches, 'atm_limit': atm_limit, 'online_services': online_services,
+                              'mobile_services': mobile_services, 'joint_accounts': joint_accounts,
+                              'child_accounts': child_accounts, 'overall_service': overall_service,
+                              'online_service': online_service, 'overdraft_service': overdraft_service,
+                              'branch_service': branch_service, 'esg_rating': esg_rating})
 
             # Commit the changes and close the connection
             conn.commit()
