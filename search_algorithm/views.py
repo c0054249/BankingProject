@@ -77,15 +77,22 @@ def submit():
     print(f"User selected {reputation} for top rated service")
 
     return results(current_account, savings_account, credit_card, isa, mortgage, branches,
-                   withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts)
+                   withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
+                   instant_notifications, spending_categories, turn_off_spending, spending_goals)
 
 
-def return_database():
+def return_database(mobile_services):
     with app.app_context():
         # Get the database connection from the current app context
         conn = db.session.connection()
 
-        query = text("SELECT * FROM banks")
+        # if the user requires mobile services then return the a joining application features related to the bank
+        # else the user does not need to query this data
+        # doing this stops returning unnecessary data
+        if mobile_services == 'yes':
+            query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+        else:
+            query = text("SELECT * FROM banks")
 
         result = conn.execute(query)
         rows = result.fetchall()
@@ -100,7 +107,9 @@ def return_database():
 
 
 def calculate_match_percentage(banks_data, current_account, savings_account, credit_card, isa, mortgage, branches,
-                               withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts):
+                               withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
+                               freeze_card, instant_notifications, spending_categories, turn_off_spending,
+                               spending_goals):
     match_percentages = []
 
     # Loop through each bank in the results
@@ -156,6 +165,31 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
         # Check mobile_services
         if mobile_services == bank_tuple['mobile_services']:
             match_score += 1
+
+            # Check freeze_card
+            if freeze_card == bank_tuple['freeze_card']:
+                match_score += 1
+            total_score += 1
+
+            # Check instant_notifications
+            if instant_notifications == bank_tuple['spending_notifications']:
+                match_score += 1
+            total_score += 1
+
+            # Check spending_categories
+            if spending_categories == bank_tuple['spending_categories']:
+                match_score += 1
+            total_score += 1
+
+            # Check turn_off_spending
+            if turn_off_spending == bank_tuple['turn_off_certain_spending']:
+                match_score += 1
+            total_score += 1
+
+            # Check spending_goals
+            if spending_goals == 'yes' and bank_tuple['budgeting_goals']:
+                match_score += 1
+            total_score += 1
         total_score += 1
 
         # Check joint_accounts
@@ -179,8 +213,9 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 
 @search_algorithm_blueprint.route('/results')
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
-            withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts):
-    banks_data = return_database()
+            withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
+            instant_notifications, spending_categories, turn_off_spending, spending_goals):
+    banks_data = return_database(mobile_services)
     match_percentages = calculate_match_percentage(
         banks_data,
         current_account,
@@ -193,7 +228,12 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         online_services,
         mobile_services,
         joint_accounts,
-        child_accounts
+        child_accounts,
+        freeze_card,
+        instant_notifications,
+        spending_categories,
+        turn_off_spending,
+        spending_goals
     )
     banks_and_scores = list(zip(banks_data, match_percentages))
 
