@@ -76,9 +76,8 @@ def submit():
     print(f"User selected {service} for top rated service")
     print(f"User selected {reputation} for top rated service")
 
-    return_database()
-
-    return "Answers submitted successfully!"
+    return results(current_account, savings_account, credit_card, isa, mortgage, branches,
+                   withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts)
 
 
 def return_database():
@@ -86,14 +85,119 @@ def return_database():
         # Get the database connection from the current app context
         conn = db.session.connection()
 
-        # Create a text query using SQLAlchemy's text() function
         query = text("SELECT * FROM banks")
 
-        # Execute the query and fetch all results as a list of dictionaries
-        results = conn.execute(query).fetchall()
+        result = conn.execute(query)
+        rows = result.fetchall()
+        keys = result.keys()  # Get the keys from the result object
+        results = [dict(zip(keys, row)) for row in rows]
 
         # Close the connection
         conn.close()
 
         # Return the query results
         return results
+
+
+def calculate_match_percentage(banks_data, current_account, savings_account, credit_card, isa, mortgage, branches,
+                               withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts):
+    match_percentages = []
+
+    # Loop through each bank in the results
+    for bank_tuple in banks_data:
+
+        # Initialize the match score and total score
+        match_score = 0
+        total_score = 0
+
+        # Check each user preference and compare it with the bank's offering, incrementing the match_score and
+        # total_score accordingly
+
+        # Check current_account
+        if current_account == bank_tuple['current_account']:
+            match_score += 1
+        total_score += 1
+
+        # Check savings_account
+        if savings_account == bank_tuple['savings_account']:
+            match_score += 1
+        total_score += 1
+
+        # Check credit_card
+        if credit_card == bank_tuple['credit_cards']:
+            match_score += 1
+        total_score += 1
+
+        # Check ISA
+        if isa == bank_tuple['isa']:
+            match_score += 1
+        total_score += 1
+
+        # Check mortgage
+        if mortgage == bank_tuple['mortgages']:
+            match_score += 1
+        total_score += 1
+
+        # Check branches
+        if branches >= bank_tuple['branches']:
+            match_score += 1
+        total_score += 1
+
+        # Check withdrawalLimit
+        if withdrawalLimit >= bank_tuple['atm_limit']:
+            match_score += 1
+        total_score += 1
+
+        # Check online_services
+        if online_services == bank_tuple['online_services']:
+            match_score += 1
+        total_score += 1
+
+        # Check mobile_services
+        if mobile_services == bank_tuple['mobile_services']:
+            match_score += 1
+        total_score += 1
+
+        # Check joint_accounts
+        if joint_accounts == bank_tuple['joint_accounts']:
+            match_score += 1
+        total_score += 1
+
+        # Check child_accounts
+        if child_accounts == bank_tuple['child_accounts']:
+            match_score += 1
+        total_score += 1
+
+        # Calculate the match percentage
+        match_percentage = (match_score / total_score) * 100
+
+        # Append the match percentage to the list
+        match_percentages.append(match_percentage)
+
+    return match_percentages
+
+
+@search_algorithm_blueprint.route('/results')
+def results(current_account, savings_account, credit_card, isa, mortgage, branches,
+            withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts):
+    banks_data = return_database()
+    match_percentages = calculate_match_percentage(
+        banks_data,
+        current_account,
+        savings_account,
+        credit_card,
+        isa,
+        mortgage,
+        branches,
+        withdrawalLimit,
+        online_services,
+        mobile_services,
+        joint_accounts,
+        child_accounts
+    )
+    banks_and_scores = list(zip(banks_data, match_percentages))
+
+    # Sort the banks and their scores based on the match percentage
+    sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
+
+    return sorted_banks_and_scores
