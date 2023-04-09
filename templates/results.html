@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .center-container {
+        text-align: center;
+    }
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+    <div class="center-container">
+        <h2>Top 3 Matching Banks</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Bank Name</th>
+                    <th>Overall Reputation</th>
+                    <th>Match Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bank, match_percentage in sorted_banks_and_scores[:3] %}
+                    <tr>
+                        <td>{{ bank.bank_name }}</td>
+                        <td>{{ bank.overall_reputation }}</td>
+                        <td>{{ "%.2f"|format(match_percentage) }}%</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

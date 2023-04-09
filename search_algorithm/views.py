@@ -240,4 +240,4 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
     # Sort the banks and their scores based on the match percentage
     sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
 
-    return sorted_banks_and_scores
+    return render_template('results.html', sorted_banks_and_scores=sorted_banks_and_scores)
