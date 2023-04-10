@@ -19,9 +19,13 @@ def index():  # put application's code here
 
 # import blueprint
 from search_algorithm.views import search_algorithm_blueprint
+from content.blueprints import blueprint
 
 # register blueprint with app
 app.register_blueprint(search_algorithm_blueprint)
+
+# register blueprint with app
+app.register_blueprint(blueprint)
 
 if __name__ == '__main__':
     app.run()
