@@ -78,7 +78,7 @@ def submit():
 
     return results(current_account, savings_account, credit_card, isa, mortgage, branches,
                    withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-                   instant_notifications, spending_categories, turn_off_spending, spending_goals, service)
+                   instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation)
 
 
 def return_database(mobile_services, service, count):
@@ -124,7 +124,7 @@ def return_database(mobile_services, service, count):
 def calculate_match_percentage(banks_data, current_account, savings_account, credit_card, isa, mortgage, branches,
                                withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
                                freeze_card, instant_notifications, spending_categories, turn_off_spending,
-                               spending_goals):
+                               spending_goals, reputation):
     match_percentages = []
 
     # Loop through each bank in the results
@@ -220,6 +220,30 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
         # Calculate the match percentage
         match_percentage = (match_score / total_score) * 100
 
+        if reputation == 'Overall':
+            if int(bank_tuple['overall_service']) > 62 and match_percentage < 95:
+                match_percentage = match_percentage + 5
+            elif int(bank_tuple['overall_service']) < 62:
+                match_percentage = match_percentage - 5
+
+        if reputation == 'Online':
+            if int(bank_tuple['online_service']) > 73 and match_percentage < 95:
+                match_percentage = match_percentage + 5
+            elif int(bank_tuple['online_service']) < 73:
+                match_percentage = match_percentage - 5
+
+        if reputation == 'Overdraft':
+            if int(bank_tuple['overdraft_service']) > 60 and match_percentage < 95:
+                match_percentage = match_percentage + 5
+            elif int(bank_tuple['overdraft_service']) < 60:
+                match_percentage = match_percentage - 5
+
+        if reputation == 'Branch':
+            if int(bank_tuple['branch_service']) > 62 and match_percentage < 95:
+                match_percentage = match_percentage + 5
+            elif int(bank_tuple['branch_service']) < 62:
+                match_percentage = match_percentage - 5
+
         # Append the match percentage to the list
         match_percentages.append(match_percentage)
 
@@ -229,7 +253,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 @search_algorithm_blueprint.route('/results')
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-            instant_notifications, spending_categories, turn_off_spending, spending_goals, service):
+            instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation):
 
     # run the functions so that is calculating a match percentage but taking the service they require as a priority
     count = 0
@@ -252,7 +276,8 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         instant_notifications,
         spending_categories,
         turn_off_spending,
-        spending_goals
+        spending_goals,
+        reputation
     )
 
     banks_and_scores_services = list(zip(banks_data_services, match_percentages_services))
@@ -281,7 +306,8 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         instant_notifications,
         spending_categories,
         turn_off_spending,
-        spending_goals
+        spending_goals,
+        reputation
     )
     banks_and_scores = list(zip(banks_data, match_percentages))
 
