@@ -85,11 +85,12 @@ def return_database(mobile_services, service, count):
     with app.app_context():
         # Get the database connection from the current app context
         conn = db.session.connection()
-        # if the user requires mobile services then return the a joining application features related to the bank
-        # else the user does not need to query this data
-        # doing this stops returning unnecessary data
+
         print(service)
         if count == 1:
+            # if the user requires mobile services then return the a joining application features related to the bank
+            # else the user does not need to query this data
+            # doing this stops returning unnecessary data
             if mobile_services == 'yes':
                 query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
             else:
