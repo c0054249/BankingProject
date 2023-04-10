@@ -78,26 +78,41 @@ def submit():
 
     return results(current_account, savings_account, credit_card, isa, mortgage, branches,
                    withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-                   instant_notifications, spending_categories, turn_off_spending, spending_goals)
+                   instant_notifications, spending_categories, turn_off_spending, spending_goals, service)
 
 
-def return_database(mobile_services):
+def return_database(mobile_services, service, count):
     with app.app_context():
         # Get the database connection from the current app context
         conn = db.session.connection()
-
         # if the user requires mobile services then return the a joining application features related to the bank
         # else the user does not need to query this data
         # doing this stops returning unnecessary data
-        if mobile_services == 'yes':
-            query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+        print(service)
+        if count == 1:
+            if mobile_services == 'yes':
+                query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+            else:
+                query = text("SELECT * FROM banks")
+
         else:
-            query = text("SELECT * FROM banks")
+            if mobile_services == 'yes':
+                query = text("SELECT * FROM banks b "
+                             "JOIN application_features af ON b.id = af.bank_id "
+                             "JOIN top_rated tr ON b.id = tr.bank_id "
+                             "WHERE tr.service = :service")
+                query = query.bindparams(service=service)
+            else:
+                query = text("SELECT * FROM banks b "
+                             "JOIN top_rated tr ON b.id = tr.bank_id "
+                             "WHERE tr.service = :service")
+                query = query.bindparams(service=service)
 
         result = conn.execute(query)
         rows = result.fetchall()
         keys = result.keys()  # Get the keys from the result object
         results = [dict(zip(keys, row)) for row in rows]
+        print(results)
 
         # Close the connection
         conn.close()
@@ -214,8 +229,41 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 @search_algorithm_blueprint.route('/results')
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-            instant_notifications, spending_categories, turn_off_spending, spending_goals):
-    banks_data = return_database(mobile_services)
+            instant_notifications, spending_categories, turn_off_spending, spending_goals, service):
+
+    # run the functions so that is calculating a match percentage but taking the service they require as a priority
+    count = 0
+    banks_data_services = return_database(mobile_services, service, count)
+    count = 1
+    match_percentages_services = calculate_match_percentage(
+        banks_data_services,
+        current_account,
+        savings_account,
+        credit_card,
+        isa,
+        mortgage,
+        branches,
+        withdrawalLimit,
+        online_services,
+        mobile_services,
+        joint_accounts,
+        child_accounts,
+        freeze_card,
+        instant_notifications,
+        spending_categories,
+        turn_off_spending,
+        spending_goals
+    )
+
+    banks_and_scores_services = list(zip(banks_data_services, match_percentages_services))
+
+    # Sort the banks and their scores based on the match percentage
+    sorted_banks_and_scores_services = sorted(banks_and_scores_services, key=lambda x: x[1], reverse=True)
+    '''print(sorted_banks_and_scores_services)'''
+
+    # this section of code determins which bank is best for the usr based on there needs and not having the service
+    # they need as a driving factor for their choice
+    banks_data = return_database(mobile_services, service, count)
     match_percentages = calculate_match_percentage(
         banks_data,
         current_account,
@@ -239,5 +287,6 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
 
     # Sort the banks and their scores based on the match percentage
     sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
+    '''print(sorted_banks_and_scores)'''
 
     return render_template('results.html', sorted_banks_and_scores=sorted_banks_and_scores)
