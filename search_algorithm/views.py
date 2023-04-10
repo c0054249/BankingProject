@@ -57,6 +57,9 @@ def submit():
     # bank reputation
     reputation = request.form.get('reputation')
 
+    # esg rating
+    esg = request.form.get('esg_rating')
+
     print(f"User selected {current_account} for current account")
     print(f"User selected {savings_account} for savings account")
     print(f"User selected {credit_card} for credit card")
@@ -74,11 +77,13 @@ def submit():
     print(f"User selected {turn_off_spending} for turn off certain spending")
     print(f"User selected {spending_goals} for spending goals")
     print(f"User selected {service} for top rated service")
-    print(f"User selected {reputation} for top rated service")
+    print(f"User selected {reputation} for reputation")
+    print(f"User selected {esg} for esg ratings")
 
     return results(current_account, savings_account, credit_card, isa, mortgage, branches,
                    withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-                   instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation)
+                   instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation,
+                   esg)
 
 
 def return_database(mobile_services, service, count):
@@ -125,7 +130,7 @@ def return_database(mobile_services, service, count):
 def calculate_match_percentage(banks_data, current_account, savings_account, credit_card, isa, mortgage, branches,
                                withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
                                freeze_card, instant_notifications, spending_categories, turn_off_spending,
-                               spending_goals, reputation):
+                               spending_goals, reputation, esg):
     match_percentages = []
 
     # Loop through each bank in the results
@@ -245,6 +250,13 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
             elif int(bank_tuple['branch_service']) < 62:
                 match_percentage = match_percentage - 5
 
+        if esg == 'yes':
+            if int(bank_tuple['esg_rating']) > 17 and match_percentage < 95:
+                match_percentage = match_percentage + 5
+            elif int(bank_tuple['esg_rating']) < 17:
+                match_percentage = match_percentage - 5
+
+
         # Append the match percentage to the list
         match_percentages.append(match_percentage)
 
@@ -254,7 +266,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 @search_algorithm_blueprint.route('/results')
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
-            instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation):
+            instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation, esg):
 
     # run the functions so that is calculating a match percentage but taking the service they require as a priority
     count = 0
@@ -278,7 +290,8 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         spending_categories,
         turn_off_spending,
         spending_goals,
-        reputation
+        reputation,
+        esg
     )
 
     banks_and_scores_services = list(zip(banks_data_services, match_percentages_services))
@@ -308,7 +321,8 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         spending_categories,
         turn_off_spending,
         spending_goals,
-        reputation
+        reputation,
+        esg
     )
     banks_and_scores = list(zip(banks_data, match_percentages))
 
