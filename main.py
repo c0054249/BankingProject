@@ -2,6 +2,7 @@ from datetime import timedelta
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.functions import current_user
+from content.web_scraping import init_web_scraping
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banks.sqlite3'
@@ -14,7 +15,8 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def index():  # put application's code here
-    return render_template('index.html', current_user=current_user)
+    top_stories = init_web_scraping()
+    return render_template('index.html', stories=top_stories, current_user=current_user)
 
 
 # import blueprint
