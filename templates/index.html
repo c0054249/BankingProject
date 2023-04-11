@@ -48,6 +48,25 @@
     </section>
 
     <hr style="border-top: 2px solid #808080">
-
+    <section class="block">
+        <div class="columns is-multiline">
+            {% for story in stories %}
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="{{ story.picture }}" alt="{{ story.headline }}">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3><a href="{{ story.hyperlink }}">{{ story.headline }}</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 
 {% endblock %}
