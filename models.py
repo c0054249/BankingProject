@@ -41,10 +41,10 @@ class Banks(db.Model):
     esg_rating = db.Column('esg_rating', db.Integer, nullable=True)
 
     # Define a one-to-many relationship with the Top_Rated table
-    top_rated_items = db.relationship('Top_Rated', backref='bank')
+    top_rated_items = db.relationship('Top_Rated', cascade="all,delete", backref='banks')
 
     # one to one relationship with application features table
-    application_features = db.relationship('Application_Features', backref='banks', uselist=False)
+    application_features = db.relationship('Application_Features', cascade="all,delete",  backref='banks', uselist=False)
 
     def __init__(self, bank_name, current_account, savings_account, credit_cards, isa, mortgages,
                  branches, atm_limit, online_services, mobile_services, joint_accounts, child_accounts, overall_service,
