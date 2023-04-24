@@ -17,6 +17,7 @@
         margin-right: auto;
     }
 </style>
+    <br><br><br><br>
         <div class="center-container">
         <h2>Top matching services</h2>
         <table class="table table-striped">
@@ -32,7 +33,7 @@
             <tbody>
                 {% for bank, match_percentage in sorted_banks_and_scores_services[:3] %}
                     <tr>
-                        <td>{{ bank.bank_name }}</td>
+                        <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
                         <td>{{ bank.overall_service }}</td>
                         <td>{{ bank.service }}</td>
                         <td>{{ bank.overview}}</td>
@@ -56,7 +57,7 @@
             <tbody>
                 {% for bank, match_percentage in sorted_banks_and_scores[:3] %}
                     <tr>
-                        <td>{{ bank.bank_name }}</td>
+                        <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
                         <td>{{ bank.overall_service }}</td>
                         <td>{{ "%.2f"|format(match_percentage) }}%</td>
                     </tr>
