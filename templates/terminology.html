@@ -48,11 +48,13 @@
         // retrieve all definitions in the script for searching
         const definitions = document.getElementsByClassName('definition');
         const searchResults = document.getElementById('searchResults');
+        const definitionsContainer = document.getElementsByClassName('definitions-container')[0];
 
         searchResults.innerHTML = "";
 
         // iterate through all the definitions when searching
         if (filter) {
+            definitionsContainer.style.display = "none";
             for (let i = 0; i < definitions.length; i++) {
                 const term = definitions[i].getElementsByClassName('term')[0];
                 // set the test values of the definition to return
@@ -70,6 +72,7 @@
                 }
             }
         } else {
+            definitionsContainer.style.display = "block";
             searchResults.style.display = "none";
             for (let i = 0; i < definitions.length; i++) {
                 definitions[i].style.display = "block";
