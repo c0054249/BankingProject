@@ -1,20 +1,20 @@
 ﻿id,bank_name,current_account,savings_account,credit_cards,isa,mortgages,branches,atm_limit,online_services,mobile_services,joint_accounts,child_accounts,overall_service,online_service,overdraft_service,branch_service,esg_rating,hyperlink
-1,Monzo,yes,yes,yes,yes,no,0,400,yes,yes,yes,no,81,84,67,0,0,Monzo – Online Banking Made Easy | Open An Account Online
-2,Starling Bank,yes,yes,yes,yes,no,0,300,yes,yes,yes,yes,81,84,70,0,0,Starling Bank: Award-winning bank accounts
-3,First Direct,yes,yes,yes,no,yes,0,500,yes,yes,yes,no,78,78,72,0,0,first direct bank: Online banking
-4,Metro bank,yes,yes,yes,yes,yes,78,300,yes,yes,yes,yes,69,71,60,74,28.1,Metro Bank | People-People Banking (metrobankonline.co.uk)
-5,Nationwide,yes,yes,yes,yes,yes,625,500,yes,yes,yes,yes,68,73,60,71,10.2,"Nationwide Building Society | Building society, nationwide"
-6,Barclays,yes,yes,yes,yes,yes,1519,300,yes,yes,yes,yes,65,78,62,60,16.5,Personal banking | Barclays
-7,Halifax,yes,yes,yes,yes,yes,518,500,yes,yes,yes,yes,64,78,63,70,0,"Halifax UK | Bank Accounts, Savings, Loans & Mortgages"
-8,Santander,yes,yes,yes,yes,yes,444,300,yes,yes,yes,yes,56,70,53,62,0,Personal | Santander UK
-9,Lloyds,yes,yes,yes,yes,yes,739,500,yes,yes,yes,yes,64,78,61,66,19.5,"Lloyds Bank - Personal Banking, Personal Finances & Bank Accounts"
-10,Virgin Money,yes,yes,yes,yes,yes,131,500,yes,yes,yes,yes,49,64,59,56,17.4,Online Banking: Personal & Business | Virgin Money UK
-11,HSBC,yes,yes,yes,yes,yes,2700,300,yes,yes,yes,yes,56,67,58,58,20.4,HSBC UK - Personal & Online Banking
-12,Natwest,yes,yes,yes,yes,yes,960,250,yes,yes,yes,yes,57,75,52,60,17.4,"NatWest Online – Bank Accounts, Mortgages, Loans and Savings"
-13,Bank of Scotland,yes,yes,yes,yes,yes,184,500,yes,yes,yes,yes,61,78,65,71,0,"Bank of Scotland | Savings, Loans, Credit Cards & Mortgages"
-14,Co-operative bank,yes,yes,yes,yes,yes,373,250,yes,yes,yes,yes,55,61,61,54,8.3,Personal banking | Online banking | The Co-operative Bank
-15,TSB,yes,yes,yes,yes,yes,220,500,yes,yes,yes,yes,49,64,54,53,16.5,Personal Banking | Life Made More | TSB Bank
-16,RBS,yes,yes,yes,yes,yes,700,1500,yes,yes,yes,yes,46,67,45,48,0,"Royal Bank of Scotland Online – Bank Accounts, Mortgages, Loans and Savings (rbs.co.uk)"
-17,Chase,yes,yes,yes,no,yes,0,0,yes,yes,no,yes,60,60,60,60,29.3,Home | Chase UK
-18,Revolut,yes,yes,yes,no,no,0,0,yes,yes,yes,yes,60,60,60,60,0,"One app, all things money | Revolut"
-19,Citibank,yes,yes,yes,yes,yes,1,500,yes,yes,yes,yes,60,60,60,60,16.5,Wealth Management Products | Multi Currency Banking | Citi UK (citibank.co.uk)
+1,Monzo,yes,yes,yes,yes,no,0,400,yes,yes,yes,no,81,84,67,0,0,https://monzo.com/
+2,Starling Bank,yes,yes,yes,yes,no,0,300,yes,yes,yes,yes,81,84,70,0,0,https://www.starlingbank.com/
+3,First Direct,yes,yes,yes,no,yes,0,500,yes,yes,yes,no,78,78,72,0,0,https://www.firstdirect.com/
+4,Metro bank,yes,yes,yes,yes,yes,78,300,yes,yes,yes,yes,69,71,60,74,28.1,https://www.metrobankonline.co.uk/
+5,Nationwide,yes,yes,yes,yes,yes,625,500,yes,yes,yes,yes,68,73,60,71,10.2,https://www.nationwide.co.uk/
+6,Barclays,yes,yes,yes,yes,yes,1519,300,yes,yes,yes,yes,65,78,62,60,16.5,https://www.barclays.co.uk/
+7,Halifax,yes,yes,yes,yes,yes,518,500,yes,yes,yes,yes,64,78,63,70,0,https://www.halifax.co.uk/
+8,Santander,yes,yes,yes,yes,yes,444,300,yes,yes,yes,yes,56,70,53,62,0,https://www.santander.co.uk/
+9,Lloyds,yes,yes,yes,yes,yes,739,500,yes,yes,yes,yes,64,78,61,66,19.5,https://www.lloydsbank.com/
+10,Virgin Money,yes,yes,yes,yes,yes,131,500,yes,yes,yes,yes,49,64,59,56,17.4,https://uk.virginmoney.com/
+11,HSBC,yes,yes,yes,yes,yes,2700,300,yes,yes,yes,yes,56,67,58,58,20.4,https://www.hsbc.co.uk/
+12,Natwest,yes,yes,yes,yes,yes,960,250,yes,yes,yes,yes,57,75,52,60,17.4,https://www.natwest.com/
+13,Bank of Scotland,yes,yes,yes,yes,yes,184,500,yes,yes,yes,yes,61,78,65,71,0,https://www.bankofscotland.co.uk/
+14,Co-operative bank,yes,yes,yes,yes,yes,373,250,yes,yes,yes,yes,55,61,61,54,8.3,https://www.coop.co.uk/
+15,TSB,yes,yes,yes,yes,yes,220,500,yes,yes,yes,yes,49,64,54,53,16.5,https://www.tsb.co.uk/personal/
+16,RBS,yes,yes,yes,yes,yes,700,1500,yes,yes,yes,yes,46,67,45,48,0,https://www.rbs.co.uk/
+17,Chase,yes,yes,yes,no,yes,0,0,yes,yes,no,yes,60,60,60,60,29.3,https://www.chase.com/
+18,Revolut,yes,yes,yes,no,no,0,0,yes,yes,yes,yes,60,60,60,60,0,https://www.revolut.com/
+19,Citibank,yes,yes,yes,yes,yes,1,500,yes,yes,yes,yes,60,60,60,60,16.5,https://www.citibank.co.uk/personal/home.do
