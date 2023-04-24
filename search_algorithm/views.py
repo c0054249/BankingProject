@@ -116,7 +116,7 @@ def return_database(mobile_services, service, count):
 
         result = conn.execute(query)
         rows = result.fetchall()
-        keys = result.keys()  # Get the keys from the result object
+        keys = result.keys()
         results = [dict(zip(keys, row)) for row in rows]
         print(results)
 
@@ -144,29 +144,34 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
         # total_score accordingly
 
         # Check current_account
-        if current_account == bank_tuple['current_account']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['current_account'] != 'na':
+            if current_account == bank_tuple['current_account']:
+                match_score += 1
+            total_score += 1
 
         # Check savings_account
-        if savings_account == bank_tuple['savings_account']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['savings_account'] != 'na':
+            if savings_account == bank_tuple['savings_account']:
+                match_score += 1
+            total_score += 1
 
         # Check credit_card
-        if credit_card == bank_tuple['credit_cards']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['credit_cards'] != 'na':
+            if credit_card == bank_tuple['credit_cards']:
+                match_score += 1
+            total_score += 1
 
         # Check ISA
-        if isa == bank_tuple['isa']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['isa'] != 'na':
+            if isa == bank_tuple['isa']:
+                match_score += 1
+            total_score += 1
 
         # Check mortgage
-        if mortgage == bank_tuple['mortgages']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['mortgages'] != 'na':
+            if mortgage == bank_tuple['mortgages']:
+                match_score += 1
+            total_score += 1
 
         # Check branches
         if branches >= bank_tuple['branches']:
@@ -179,12 +184,13 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
         total_score += 1
 
         # Check online_services
-        if online_services == bank_tuple['online_services']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['online_services'] != 'na':
+            if online_services == bank_tuple['online_services']:
+                match_score += 1
+            total_score += 1
 
         # Check mobile_services
-        if mobile_services == bank_tuple['mobile_services']:
+        if mobile_services == 'yes' and bank_tuple['mobile_services'] == 'yes':
             match_score += 1
 
             # Check freeze_card
@@ -208,20 +214,22 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
             total_score += 1
 
             # Check spending_goals
-            if spending_goals == 'yes' and bank_tuple['budgeting_goals']:
+            if spending_goals == bank_tuple['budgeting_goals']:
                 match_score += 1
             total_score += 1
         total_score += 1
 
         # Check joint_accounts
-        if joint_accounts == bank_tuple['joint_accounts']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['joint_accounts'] != 'na':
+            if joint_accounts == bank_tuple['joint_accounts']:
+                match_score += 1
+            total_score += 1
 
         # Check child_accounts
-        if child_accounts == bank_tuple['child_accounts']:
-            match_score += 1
-        total_score += 1
+        if bank_tuple['child_accounts'] != 'na':
+            if child_accounts == bank_tuple['child_accounts']:
+                match_score += 1
+            total_score += 1
 
         # Calculate the match percentage
         match_percentage = (match_score / total_score) * 100
@@ -300,7 +308,7 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
     sorted_banks_and_scores_services = sorted(banks_and_scores_services, key=lambda x: x[1], reverse=True)
     '''print(sorted_banks_and_scores_services)'''
 
-    # this section of code determins which bank is best for the usr based on there needs and not having the service
+    # this section of code determines which bank is best for the usr based on there needs and not having the service
     # they need as a driving factor for their choice
     banks_data = return_database(mobile_services, service, count)
     match_percentages = calculate_match_percentage(
