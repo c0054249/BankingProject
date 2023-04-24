@@ -39,6 +39,7 @@ class Banks(db.Model):
     overdraft_service = db.Column('overdraft_service', db.Integer, nullable=True)
     branch_service = db.Column('branch_service', db.Integer, nullable=True)
     esg_rating = db.Column('esg_rating', db.Integer, nullable=True)
+    hyperlink = db.Column('hyperlink', db.String, nullable=False)
 
     # Define a one-to-many relationship with the Top_Rated table
     top_rated_items = db.relationship('Top_Rated', cascade='all,delete', backref='banks')
@@ -48,7 +49,7 @@ class Banks(db.Model):
 
     def __init__(self, bank_name, current_account, savings_account, credit_cards, isa, mortgages,
                  branches, atm_limit, online_services, mobile_services, joint_accounts, child_accounts, overall_service,
-                 online_service, overdraft_service, branch_service, esg_rating):
+                 online_service, overdraft_service, branch_service, esg_rating, hyperlink):
         self.bank_name = bank_name
         self.current_account = current_account
         self.savings_account = savings_account
@@ -66,6 +67,7 @@ class Banks(db.Model):
         self.overdraft_service = overdraft_service
         self.branch_service = branch_service
         self.esg_rating = esg_rating
+        self.hyperlink = hyperlink
 
 
 class Top_Rated(db.Model):
