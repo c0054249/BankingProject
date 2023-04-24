@@ -40,18 +40,27 @@
 </style>
 
 <script>
+    // search function for terms
     function searchFunction() {
         const input = document.getElementById('searchInput');
+        // convert to uppercase to avoid any case errors
         const filter = input.value.toUpperCase();
+        // retrieve all definitions in the script for searching
         const definitions = document.getElementsByClassName('definition');
 
+
+        // iterate through all the definitions when searching
         for (let i = 0; i < definitions.length; i++) {
             const term = definitions[i].getElementsByClassName('term')[0];
-            const txtValue = term.textContent || term.innerText;
+            // set the test values of the definition to return
+            const txtValue = term.textContent;
+            // check to see if the txtValue in upper case contains the search filter. indexOf() returns -1 if no match
+            // in strings is found
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 definitions[i].style.display = "";
+            // no match, return no display
             } else {
-                definitions[i].style.display = "Term not found";
+                definitions[i].style.display = "none";
             }
         }
     }
