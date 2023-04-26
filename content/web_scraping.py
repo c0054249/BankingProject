@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def fetch_top_stories(url, count=4):
     response = requests.get(url)
 
@@ -22,7 +23,10 @@ def fetch_top_stories(url, count=4):
         hyperlink = 'https://www.ft.com' + link_element["href"]
 
         image_element = story.find("img", class_="o-teaser__image o-lazy-load")
-        picture = image_element.get("src") or image_element.get("data-src")
+        if image_element is not None:
+            picture = image_element.get("src") or image_element.get("data-src")
+        else:
+            picture = 'static\stock-bank-image.jpg'
 
         top_stories.append({"headline": headline, "picture": picture, "hyperlink": hyperlink})
 
