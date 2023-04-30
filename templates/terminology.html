@@ -40,7 +40,7 @@
 </style>
 
 <script>
-    // search function for terms
+    // search bar functionality
     function searchFunction() {
         const input = document.getElementById('searchInput');
         // convert to uppercase to avoid any case errors
@@ -57,10 +57,10 @@
             definitionsContainer.style.display = "none";
             for (let i = 0; i < definitions.length; i++) {
                 const term = definitions[i].getElementsByClassName('term')[0];
-                // set the test values of the definition to return
+                // set the text values of the definition to return
                 const txtValue = term.textContent;
-                // check to see if the txtValue in upper case contains the search filter. indexOf() returns -1 if no match
-                // in strings is found
+                // check to see if the txtValue in upper case contains the search filter. indexOf() returns -1 if
+                // no match in strings is found
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     const matchingDefinition = document.createElement("div");
                     matchingDefinition.innerHTML = definitions[i].innerHTML;

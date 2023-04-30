@@ -102,11 +102,11 @@ def populate_application_features():
 
 def populate_top_rated():
     with app.app_context():
-        # Open the CSV file and read its contents
+        # Open the CSV file and read contents
         with open('csv files/top_rated.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
-            # Connect to the database and create a cursor
+            # Connect to database and create cursor
             conn = db.session.connection()
 
             # Iterate through each row in the CSV file and insert it into the database

@@ -88,12 +88,14 @@ def submit():
 
 def return_database(mobile_services, service, count):
     with app.app_context():
-        # Get the database connection from the current app context
+        # Get the database connection with the current app context
         conn = db.session.connection()
 
-        print(service)
+        # the count variable is used to determine which instance the search algorithm is in. When it equals 1 the
+        # top_rated search has already been executed
         if count == 1:
-            # if the user requires mobile services then return the a joining application features related to the bank
+            # if the user requires mobile services then return dataset with application features joined to the banks
+            # table
             # else the user does not need to query this data
             # doing this stops returning unnecessary data
             if mobile_services == 'yes':
@@ -102,6 +104,9 @@ def return_database(mobile_services, service, count):
                 query = text("SELECT * FROM banks")
 
         else:
+            # the else statement is run when the top rated search is being performed
+            # as a result the banks table is always joined to the top rated service returning the banks that match the
+            # service inputted by the user
             if mobile_services == 'yes':
                 query = text("SELECT * FROM banks b "
                              "JOIN application_features af ON b.id = af.bank_id "
@@ -231,7 +236,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
                 match_score += 1
             total_score += 1
 
-        # Calculate the match percentage
+        # Calculate match percentage
         match_percentage = (match_score / total_score) * 100
 
         if reputation == 'Overall':
@@ -264,7 +269,6 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
             elif int(bank_tuple['esg_rating']) < 17:
                 match_percentage = match_percentage - 5
 
-
         # Append the match percentage to the list
         match_percentages.append(match_percentage)
 
@@ -275,7 +279,6 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
             instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation, esg):
-
     # run the functions so that is calculating a match percentage but taking the service they require as a priority
     count = 0
     banks_data_services = return_database(mobile_services, service, count)
