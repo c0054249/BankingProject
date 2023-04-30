@@ -2,14 +2,6 @@
 
 {% block content %}
 <style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-top: 60px;
-    }
     .center-container {
         text-align: center;
     }
@@ -17,78 +9,144 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .card {
+        margin-bottom: 20px;
+    }
 </style>
-    <br><br><br><br>
-        <div class="center-container">
-        {% set first_bank_services = sorted_banks_and_scores_services[0] %}
-        {% set first_bank_overall = sorted_banks_and_scores[0] %}
-        {% if first_bank_services[1] < first_bank_overall[1] %}
-            <p>Looking at the results we can see that for the services you want
-                <strong>{{ first_bank_services[0].bank_name }}</strong> is the best option for you and the service
-                you desire with a <strong>{{ "%.2f"|format(first_bank_services[1]) }}</strong> percentage match.
-                However, when looking at the results we can see that although
-                <strong>{{ first_bank_overall[0].bank_name }}</strong> isn't top rated for the service you desire,
-                it may be a better option for you as it gave a
-                <strong>{{ "%.2f"|format(first_bank_overall[1]) }}</strong> match percentage.</p>
 
-            <p>We recommend taking a look at both of these banks following the hyperlinks provided by clicking on
-                the bank names in the tables. When looking at the banks, refer back to the "How to Choose a Bank"
-                guide so you can make the best decision.</p>
-        {% else %}
-            <p>Your in luck! <strong>{{ first_bank_services[0].bank_name }}</strong> is the best match for you with a
-                <strong>{{ "%.2f"|format(first_bank_services[1]) }}</strong> match percentage and it is also top rated
-                for <strong>{{ first_bank_services[0].service }}</strong>. We recommend following the hyperlink to the
-                <a href="{{ first_bank_services[0].hyperlink }}"><strong>{{ first_bank_services[0].bank_name }}</strong></a> site to explore further.</p>
-
-            <p>Don't forget about the factors to look for suggested by our "How to Choose a Bank" guide. If you are
-                unsure about any further terminology used, please use our terminology page to search for the relevant
-                definitions.</p>
-        {% endif %}
-
-        <h2>Top matching services</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Bank Name</th>
-                    <th>Overall Reputation</th>
-                    <th>Service</th>
-                    <th>Overview</th>
-                    <th>Match Percentage</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bank, match_percentage in sorted_banks_and_scores_services[:3] %}
-                    <tr>
-                        <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
-                        <td>{{ bank.overall_service }}</td>
-                        <td>{{ bank.service }}</td>
-                        <td>{{ bank.overview}}</td>
-                        <td>{{ "%.2f"|format(match_percentage) }}%</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<section class="block hero is-medium" style="padding: 80px;">
+    <div class="block">
+        <h1 class="title">Search Complete</h1>
     </div>
-    <br><br><br><br><br><br>
-    <div class="center-container">
-        <h2>Top 3 Matching Banks</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Bank Name</th>
-                    <th>Overall Reputation</th>
-                    <th>Match Percentage</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bank, match_percentage in sorted_banks_and_scores[:3] %}
-                    <tr>
-                        <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
-                        <td>{{ bank.overall_service }}</td>
-                        <td>{{ "%.2f"|format(match_percentage) }}%</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+</section>
+
+<br><br>
+<hr style="border-top: 2px solid #808080">
+<br><br>
+
+<section class="block">
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class="box is-two-thirds">
+                <div class="columns is-centered">
+                    <div class="column">
+                        <div class="content center-container">
+                            {% set first_bank_services = sorted_banks_and_scores_services[0] %}
+                            {% set first_bank_overall = sorted_banks_and_scores[0] %}
+
+                            {% if first_bank_services[1] < first_bank_overall[1] %}
+                                <p>Looking at the results, we can see that for the services you want,
+                                    <a href="{{ first_bank_services[0].hyperlink }}"><strong>{{ first_bank_services[0].bank_name }}</strong></a>
+                                    is the best option for you with a
+                                    <strong>{{ "%.2f"|format(first_bank_services[1]) }}</strong> percentage match.
+                                    However, although
+                                    <a href="{{ first_bank_overall[0].hyperlink }}"><strong>{{ first_bank_overall[0].bank_name }}</strong></a>
+                                    isn't top-rated for the service you desire, it may be a better option for you as it
+                                    gave a <strong>{{ "%.2f"|format(first_bank_overall[1]) }}</strong> match percentage.</p>
+
+                                <p>We recommend taking a look at both of these banks following the hyperlinks provided
+                                    by clicking on the bank names. When looking at the banks, refer back to the
+                                    "How to Choose a Bank" guide so you can make the best decision and use the
+                                    terminology search if you are unsure on any language you come across.</p>
+                            {% else %}
+                                <p>You're in luck! <strong>{{ first_bank_services[0].bank_name }}</strong> is the best
+                                    match for you with a <strong>{{ "%.2f"|format(first_bank_services[1]) }}</strong>
+                                    percentage match and it is also top-rated for <strong>{{ first_bank_services[0].service }}</strong>.
+                                    We recommend following the hyperlink to the
+                                    <a href="{{ first_bank_services[0].hyperlink }}"><strong>{{ first_bank_services[0].bank_name }}</strong></a>
+                                    site to explore further.</p>
+
+                                <p>Don't forget about the factors to look for suggested by our
+                                    "How to Choose a Bank" guide. If you are unsure about any further terminology used,
+                                    please use our terminology page to search for the relevant definitions.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<br><br>
+<hr style="border-top: 2px solid #808080">
+<br><br>
+
+<section class="block">
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class="box is-two-thirds">
+                <div class="columns is-centered">
+                    <div class="column">
+                        <div class="content">
+                            <h2>Top matching services</h2>
+                            <p>This table displays the banks that are top rated for your desired service with your percentage match to them</p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Bank Name</th>
+                                        <th>Overall Reputation</th>
+                                        <th>Service</th>
+                                        <th>Overview</th>
+                                        <th>Match Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for bank, match_percentage in sorted_banks_and_scores_services[:3] %}
+                                            <tr>
+                                                <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
+                                                <td>{{ bank.overall_service }}</td>
+                                                <td>{{ bank.service }}</td>
+                                                <td>{{ bank.overview}}</td>
+                                                <td>{{ "%.2f"|format(match_percentage) }}%</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<br><br>
+<hr style="border-top: 2px solid #808080">
+<br><br>
+
+<section class="block">
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class="box is-two-thirds">
+                <div class="columns is-centered">
+                    <div class="column">
+                        <div class="content">
+                            <h2>Top 3 Matching Banks</h2>
+                            <p>This table displays the top 3 banks that match you best based on the criteria you selected</p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Bank Name</th>
+                                        <th>Overall Reputation</th>
+                                        <th>Match Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for bank, match_percentage in sorted_banks_and_scores[:3] %}
+                                        <tr>
+                                            <td><a href="{{ bank.hyperlink }}">{{ bank.bank_name }}</a></td>
+                                            <td>{{ bank.overall_service }}</td>
+                                            <td>{{ "%.2f"|format(match_percentage) }}%</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
