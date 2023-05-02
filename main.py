@@ -21,9 +21,14 @@ def index():  # put application's code here
 
 # 404 error handling
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found(e):
     return render_template('error_codes/404.html'), 404
 
+
+# 500 error handling
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error_codes/500.html'), 500
 
 # import blueprint
 from search_algorithm.views import search_algorithm_blueprint
