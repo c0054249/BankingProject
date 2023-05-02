@@ -19,6 +19,12 @@ def index():  # put application's code here
     return render_template('index.html', stories=top_stories, current_user=current_user)
 
 
+# 404 error handling
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('error_codes/404.html'), 404
+
+
 # import blueprint
 from search_algorithm.views import search_algorithm_blueprint
 from content.blueprints import blueprint
