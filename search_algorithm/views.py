@@ -87,190 +87,203 @@ def submit():
 
 
 def return_database(mobile_services, service, count):
-    with app.app_context():
-        # Get the database connection with the current app context
-        conn = db.session.connection()
+    try:
+        with app.app_context():
+            # Get the database connection with the current app context
+            conn = db.session.connection()
 
-        # the count variable is used to determine which instance the search algorithm is in. When it equals 1 the
-        # top_rated search has already been executed
-        if count == 1:
-            # if the user requires mobile services then return dataset with application features joined to the banks
-            # table
-            # else the user does not need to query this data
-            # doing this stops returning unnecessary data
-            if mobile_services == 'yes':
-                query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+            # the count variable is used to determine which instance the search algorithm is in. When it equals 1 the
+            # top_rated search has already been executed
+            if count == 1:
+                # if the user requires mobile services then return dataset with application features joined to the banks
+                # table
+                # else the user does not need to query this data
+                # doing this stops returning unnecessary data
+                if mobile_services == 'yes':
+                    query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+                else:
+                    query = text("SELECT * FROM banks")
+
             else:
-                query = text("SELECT * FROM banks")
+                # the else statement is run when the top rated search is being performed
+                # as a result the banks table is always joined to the top rated service returning the banks that match the
+                # service inputted by the user
+                if mobile_services == 'yes':
+                    query = text("SELECT * FROM banks b "
+                                 "JOIN application_features af ON b.id = af.bank_id "
+                                 "JOIN top_rated tr ON b.id = tr.bank_id "
+                                 "WHERE tr.service = :service")
+                    query = query.bindparams(service=service)
+                else:
+                    query = text("SELECT * FROM banks b "
+                                 "JOIN top_rated tr ON b.id = tr.bank_id "
+                                 "WHERE tr.service = :service")
+                    query = query.bindparams(service=service)
 
-        else:
-            # the else statement is run when the top rated search is being performed
-            # as a result the banks table is always joined to the top rated service returning the banks that match the
-            # service inputted by the user
-            if mobile_services == 'yes':
-                query = text("SELECT * FROM banks b "
-                             "JOIN application_features af ON b.id = af.bank_id "
-                             "JOIN top_rated tr ON b.id = tr.bank_id "
-                             "WHERE tr.service = :service")
-                query = query.bindparams(service=service)
-            else:
-                query = text("SELECT * FROM banks b "
-                             "JOIN top_rated tr ON b.id = tr.bank_id "
-                             "WHERE tr.service = :service")
-                query = query.bindparams(service=service)
+            result = conn.execute(query)
+            rows = result.fetchall()
+            keys = result.keys()
+            results = [dict(zip(keys, row)) for row in rows]
+            print(results)
 
-        result = conn.execute(query)
-        rows = result.fetchall()
-        keys = result.keys()
-        results = [dict(zip(keys, row)) for row in rows]
-        print(results)
+            # Close the connection
+            conn.close()
 
-        # Close the connection
-        conn.close()
+            # Return the query results
+            return results
 
-        # Return the query results
-        return results
+    except Exception as e:
+        print(f"Error connecting to the database: {e}")
+        return None
 
 
 def calculate_match_percentage(banks_data, current_account, savings_account, credit_card, isa, mortgage, branches,
                                withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
                                freeze_card, instant_notifications, spending_categories, turn_off_spending,
                                spending_goals, reputation, esg):
+
+    if not isinstance(banks_data, list):
+        return []
+
     match_percentages = []
 
-    # Loop through each bank in the results
-    for bank_tuple in banks_data:
+    try:
+        # Loop through each bank in the results
+        for bank_tuple in banks_data:
 
-        # Initialize the match score and total score
-        match_score = 0
-        total_score = 0
+            # Initialize the match score and total score
+            match_score = 0
+            total_score = 0
 
-        # Check each user preference and compare it with the bank's offering, incrementing the match_score and
-        # total_score accordingly
+            # Check each user preference and compare it with the bank's offering, incrementing the match_score and
+            # total_score accordingly
 
-        # Check current_account
-        if bank_tuple['current_account'] != 'na':
-            if current_account == bank_tuple['current_account']:
+            # Check current_account
+            if bank_tuple['current_account'] != 'na':
+                if current_account == bank_tuple['current_account']:
+                    match_score += 1
+                total_score += 1
+
+            # Check savings_account
+            if bank_tuple['savings_account'] != 'na':
+                if savings_account == bank_tuple['savings_account']:
+                    match_score += 1
+                total_score += 1
+
+            # Check credit_card
+            if bank_tuple['credit_cards'] != 'na':
+                if credit_card == bank_tuple['credit_cards']:
+                    match_score += 1
+                total_score += 1
+
+            # Check ISA
+            if bank_tuple['isa'] != 'na':
+                if isa == bank_tuple['isa']:
+                    match_score += 1
+                total_score += 1
+
+            # Check mortgage
+            if bank_tuple['mortgages'] != 'na':
+                if mortgage == bank_tuple['mortgages']:
+                    match_score += 1
+                total_score += 1
+
+            # Check branches
+            if branches >= bank_tuple['branches']:
                 match_score += 1
             total_score += 1
 
-        # Check savings_account
-        if bank_tuple['savings_account'] != 'na':
-            if savings_account == bank_tuple['savings_account']:
+            # Check withdrawalLimit
+            if withdrawalLimit >= bank_tuple['atm_limit']:
                 match_score += 1
             total_score += 1
 
-        # Check credit_card
-        if bank_tuple['credit_cards'] != 'na':
-            if credit_card == bank_tuple['credit_cards']:
+            # Check online_services
+            if bank_tuple['online_services'] != 'na':
+                if online_services == bank_tuple['online_services']:
+                    match_score += 1
+                total_score += 1
+
+            # Check mobile_services
+            if mobile_services == 'yes' and bank_tuple['mobile_services'] == 'yes':
                 match_score += 1
+
+                # Check freeze_card
+                if freeze_card == bank_tuple['freeze_card']:
+                    match_score += 1
+                total_score += 1
+
+                # Check instant_notifications
+                if instant_notifications == bank_tuple['spending_notifications']:
+                    match_score += 1
+                total_score += 1
+
+                # Check spending_categories
+                if spending_categories == bank_tuple['spending_categories']:
+                    match_score += 1
+                total_score += 1
+
+                # Check turn_off_spending
+                if turn_off_spending == bank_tuple['turn_off_certain_spending']:
+                    match_score += 1
+                total_score += 1
+
+                # Check spending_goals
+                if spending_goals == bank_tuple['budgeting_goals']:
+                    match_score += 1
+                total_score += 1
             total_score += 1
 
-        # Check ISA
-        if bank_tuple['isa'] != 'na':
-            if isa == bank_tuple['isa']:
-                match_score += 1
-            total_score += 1
+            # Check joint_accounts
+            if bank_tuple['joint_accounts'] != 'na':
+                if joint_accounts == bank_tuple['joint_accounts']:
+                    match_score += 1
+                total_score += 1
 
-        # Check mortgage
-        if bank_tuple['mortgages'] != 'na':
-            if mortgage == bank_tuple['mortgages']:
-                match_score += 1
-            total_score += 1
+            # Check child_accounts
+            if bank_tuple['child_accounts'] != 'na':
+                if child_accounts == bank_tuple['child_accounts']:
+                    match_score += 1
+                total_score += 1
 
-        # Check branches
-        if branches >= bank_tuple['branches']:
-            match_score += 1
-        total_score += 1
+            # Calculate match percentage
+            match_percentage = (match_score / total_score) * 100
 
-        # Check withdrawalLimit
-        if withdrawalLimit >= bank_tuple['atm_limit']:
-            match_score += 1
-        total_score += 1
+            if reputation == 'Overall':
+                if int(bank_tuple['overall_service']) > 62 and match_percentage < 95:
+                    match_percentage = match_percentage + 5
+                elif int(bank_tuple['overall_service']) < 62:
+                    match_percentage = match_percentage - 5
 
-        # Check online_services
-        if bank_tuple['online_services'] != 'na':
-            if online_services == bank_tuple['online_services']:
-                match_score += 1
-            total_score += 1
+            if reputation == 'Online':
+                if int(bank_tuple['online_service']) > 73 and match_percentage < 95:
+                    match_percentage = match_percentage + 5
+                elif int(bank_tuple['online_service']) < 73:
+                    match_percentage = match_percentage - 5
 
-        # Check mobile_services
-        if mobile_services == 'yes' and bank_tuple['mobile_services'] == 'yes':
-            match_score += 1
+            if reputation == 'Overdraft':
+                if int(bank_tuple['overdraft_service']) > 60 and match_percentage < 95:
+                    match_percentage = match_percentage + 5
+                elif int(bank_tuple['overdraft_service']) < 60:
+                    match_percentage = match_percentage - 5
 
-            # Check freeze_card
-            if freeze_card == bank_tuple['freeze_card']:
-                match_score += 1
-            total_score += 1
+            if reputation == 'Branch':
+                if int(bank_tuple['branch_service']) > 62 and match_percentage < 95:
+                    match_percentage = match_percentage + 5
+                elif int(bank_tuple['branch_service']) < 62:
+                    match_percentage = match_percentage - 5
 
-            # Check instant_notifications
-            if instant_notifications == bank_tuple['spending_notifications']:
-                match_score += 1
-            total_score += 1
+            if esg == 'yes':
+                if int(bank_tuple['esg_rating']) > 17 and match_percentage < 95:
+                    match_percentage = match_percentage + 5
+                elif int(bank_tuple['esg_rating']) < 17:
+                    match_percentage = match_percentage - 5
 
-            # Check spending_categories
-            if spending_categories == bank_tuple['spending_categories']:
-                match_score += 1
-            total_score += 1
-
-            # Check turn_off_spending
-            if turn_off_spending == bank_tuple['turn_off_certain_spending']:
-                match_score += 1
-            total_score += 1
-
-            # Check spending_goals
-            if spending_goals == bank_tuple['budgeting_goals']:
-                match_score += 1
-            total_score += 1
-        total_score += 1
-
-        # Check joint_accounts
-        if bank_tuple['joint_accounts'] != 'na':
-            if joint_accounts == bank_tuple['joint_accounts']:
-                match_score += 1
-            total_score += 1
-
-        # Check child_accounts
-        if bank_tuple['child_accounts'] != 'na':
-            if child_accounts == bank_tuple['child_accounts']:
-                match_score += 1
-            total_score += 1
-
-        # Calculate match percentage
-        match_percentage = (match_score / total_score) * 100
-
-        if reputation == 'Overall':
-            if int(bank_tuple['overall_service']) > 62 and match_percentage < 95:
-                match_percentage = match_percentage + 5
-            elif int(bank_tuple['overall_service']) < 62:
-                match_percentage = match_percentage - 5
-
-        if reputation == 'Online':
-            if int(bank_tuple['online_service']) > 73 and match_percentage < 95:
-                match_percentage = match_percentage + 5
-            elif int(bank_tuple['online_service']) < 73:
-                match_percentage = match_percentage - 5
-
-        if reputation == 'Overdraft':
-            if int(bank_tuple['overdraft_service']) > 60 and match_percentage < 95:
-                match_percentage = match_percentage + 5
-            elif int(bank_tuple['overdraft_service']) < 60:
-                match_percentage = match_percentage - 5
-
-        if reputation == 'Branch':
-            if int(bank_tuple['branch_service']) > 62 and match_percentage < 95:
-                match_percentage = match_percentage + 5
-            elif int(bank_tuple['branch_service']) < 62:
-                match_percentage = match_percentage - 5
-
-        if esg == 'yes':
-            if int(bank_tuple['esg_rating']) > 17 and match_percentage < 95:
-                match_percentage = match_percentage + 5
-            elif int(bank_tuple['esg_rating']) < 17:
-                match_percentage = match_percentage - 5
-
-        # Append the match percentage to the list
-        match_percentages.append(match_percentage)
+            # Append the match percentage to the list
+            match_percentages.append(match_percentage)
+    except Exception as e:
+        print(f"Error calculating match percentage: {e}")
+        return []
 
     return match_percentages
 
@@ -279,68 +292,74 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
             instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation, esg):
-    # run the functions so that is calculating a match percentage but taking the service they require as a priority
-    count = 0
-    banks_data_services = return_database(mobile_services, service, count)
-    count = 1
-    match_percentages_services = calculate_match_percentage(
-        banks_data_services,
-        current_account,
-        savings_account,
-        credit_card,
-        isa,
-        mortgage,
-        branches,
-        withdrawalLimit,
-        online_services,
-        mobile_services,
-        joint_accounts,
-        child_accounts,
-        freeze_card,
-        instant_notifications,
-        spending_categories,
-        turn_off_spending,
-        spending_goals,
-        reputation,
-        esg
-    )
 
-    banks_and_scores_services = list(zip(banks_data_services, match_percentages_services))
+    try:
+        # run the functions so that is calculating a match percentage but taking the service they require as a priority
+        count = 0
+        banks_data_services = return_database(mobile_services, service, count)
+        count = 1
+        match_percentages_services = calculate_match_percentage(
+            banks_data_services,
+            current_account,
+            savings_account,
+            credit_card,
+            isa,
+            mortgage,
+            branches,
+            withdrawalLimit,
+            online_services,
+            mobile_services,
+            joint_accounts,
+            child_accounts,
+            freeze_card,
+            instant_notifications,
+            spending_categories,
+            turn_off_spending,
+            spending_goals,
+            reputation,
+            esg
+        )
 
-    # Sort the banks and their scores based on the match percentage
-    sorted_banks_and_scores_services = sorted(banks_and_scores_services, key=lambda x: x[1], reverse=True)
-    '''print(sorted_banks_and_scores_services)'''
+        banks_and_scores_services = list(zip(banks_data_services, match_percentages_services))
 
-    # this section of code determines which bank is best for the usr based on there needs and not having the service
-    # they need as a driving factor for their choice
-    banks_data = return_database(mobile_services, service, count)
-    match_percentages = calculate_match_percentage(
-        banks_data,
-        current_account,
-        savings_account,
-        credit_card,
-        isa,
-        mortgage,
-        branches,
-        withdrawalLimit,
-        online_services,
-        mobile_services,
-        joint_accounts,
-        child_accounts,
-        freeze_card,
-        instant_notifications,
-        spending_categories,
-        turn_off_spending,
-        spending_goals,
-        reputation,
-        esg
-    )
+        # Sort the banks and their scores based on the match percentage
+        sorted_banks_and_scores_services = sorted(banks_and_scores_services, key=lambda x: x[1], reverse=True)
+        '''print(sorted_banks_and_scores_services)'''
 
-    # zip match percentage to corresponding bank
-    banks_and_scores = list(zip(banks_data, match_percentages))
+        # this section of code determines which bank is best for the usr based on there needs and not having the service
+        # they need as a driving factor for their choice
+        banks_data = return_database(mobile_services, service, count)
+        match_percentages = calculate_match_percentage(
+            banks_data,
+            current_account,
+            savings_account,
+            credit_card,
+            isa,
+            mortgage,
+            branches,
+            withdrawalLimit,
+            online_services,
+            mobile_services,
+            joint_accounts,
+            child_accounts,
+            freeze_card,
+            instant_notifications,
+            spending_categories,
+            turn_off_spending,
+            spending_goals,
+            reputation,
+            esg
+        )
 
-    # Sort the banks and their scores based on the match percentage
-    sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
+        # zip match percentage to corresponding bank
+        banks_and_scores = list(zip(banks_data, match_percentages))
 
-    return render_template('results.html', sorted_banks_and_scores=sorted_banks_and_scores,
-                           sorted_banks_and_scores_services=sorted_banks_and_scores_services)
+        # Sort the banks and their scores based on the match percentage
+        sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
+
+        return render_template('results.html', sorted_banks_and_scores=sorted_banks_and_scores,
+                               sorted_banks_and_scores_services=sorted_banks_and_scores_services)
+
+    except Exception as e:
+        print(f"Error generating results: {e}")
+        return render_template('error.html', error_message="Error generating results")

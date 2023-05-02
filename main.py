@@ -30,6 +30,7 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('error_codes/500.html'), 500
 
+
 # import blueprint
 from search_algorithm.views import search_algorithm_blueprint
 from content.blueprints import blueprint
