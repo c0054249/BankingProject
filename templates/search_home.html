@@ -2,19 +2,30 @@
 
 {% block content %}
 
-    <body>
-      <section class="container">
-        <div class="container">
-          <h1 class="title">
-            Have you tried our bank search algorithm?
-          </h1>
-            <div class="p-auto">
-                    <a href="{{ url_for('search_algorithm.services') }}" class="button is-success is-rounded is-large">
-                        Start
-                    </a>
-            </div>
-        </div>
-      </section>
-    </body>
+<body>
+  <section class="container">
+    <div class="container">
+      <hr>
+      <h1 class="title">
+        Have you tried our bank search algorithm?
+      </h1>
+      <div class="content">
+            <p>
+              Please have a look at the guides available on the site before starting as the better your understanding, the more accurate the results produced.
+            </p>
+            <p>
+              To understand how the algorithm works please have a look at the guides or click
+              <a href="{{ url_for('blueprints.search_overview') }}">here</a>.
+            </p>
+      </div>
+      <div class="p-auto">
+        <a href="{{ url_for('search_algorithm.services') }}" class="button is-success is-rounded is-large">
+          Start
+        </a>
+      </div>
+      <hr>
+    </div>
+  </section>
+</body>
 
 {% endblock %}

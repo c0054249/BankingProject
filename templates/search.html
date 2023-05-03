@@ -8,7 +8,7 @@
         <title>What services do you require from your bank?</title>
       </head>
       <body>
-        <h1>Services</h1>
+        <h1 style="font-weight: bold;">Services</h1>
         <br><br>
         <form method="POST" action="/submit">
           <label for="current_account">Current account?</label>
@@ -63,7 +63,7 @@
 
           <hr style="border-top: 2px solid #808080">
 
-          <h1>Accessibility</h1>
+          <h1 style="font-weight: bold;">Accessibility</h1>
             <br><br>
             <label>What coverage of branches do you require:</label><br>
             <input type="radio" id="low" name="branches" value="0" checked>
@@ -126,7 +126,7 @@
 
             <hr style="border-top: 2px solid #808080">
 
-            <h1>Application Features</h1>
+            <h1 style="font-weight: bold;">Application Features</h1>
             <br><br>
             <label for="freezeCard">Freeze debit card in app?</label>
             <input type="radio" id="freezeYes" name="freezeCard" value="yes">
@@ -170,7 +170,7 @@
 
             <hr style="border-top: 2px solid #808080">
               <fieldset>
-                <legend>Which of the following services is most important to you for this bank account?</legend>
+                <legend style="font-weight: bold;">Which of the following services is most important to you for this bank account?</legend>
                   <br><br>
                 <div class="grid-container">
                   <div>
@@ -267,7 +267,7 @@
             <hr style="border-top: 2px solid #808080">
 
             <fieldset>
-                <legend>Which bank reputation is most important to you?</legend>
+                <legend style="font-weight: bold;">Which bank reputation is most important to you?</legend>
                 <br>
                 <div class="grid-container-2">
                     <div>
@@ -299,7 +299,7 @@
             </style>
 
             <hr style="border-top: 2px solid #808080">
-            <label for="esg_rating">Are the ESG ratings of the banks important to you?</label>
+            <label for="esg_rating" style="font-weight: bold;">Are the ESG ratings of the banks important to you?</label>
             <br><br>
             <input type="radio" id="esg_rating_yes" name="esg_rating" value="yes">
             <label for="esg_rating_yes">Yes</label>
@@ -308,7 +308,7 @@
             <br>
             <hr style="border-top: 2px solid #808080">
 
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="button is-success is-rounded">
         </form>
       </body>
     </html>
