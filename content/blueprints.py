@@ -17,3 +17,8 @@ def terminology():
 @blueprint.route('/search_overview')
 def search_overview():
     return render_template('search_overview.html')
+
+
+@blueprint.route('/about')
+def about():
+    return render_template('about.html')
