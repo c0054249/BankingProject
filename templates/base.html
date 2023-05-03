@@ -109,5 +109,25 @@
       </div>
     </footer>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('#navbarA');
+
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+
+      const dropdowns = document.querySelectorAll('.navbar-item.has-dropdown');
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener('click', () => {
+          dropdown.querySelector('.navbar-dropdown').classList.toggle('is-active');
+        });
+      });
+    });
+</script>
+
 </body>
 </html>
