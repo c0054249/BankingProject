@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .center-container {
+            text-align: center;
+        }
+        .table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <section class="block hero is-medium" style="padding: 80px;">
+        <div class="block">
+            <h1 class="title">How does the search algorithm work?</h1>
+        </div>
+    </section>
+
+    <br><br>
+    <hr style="border-top: 2px solid #808080">
+    <br><br>
+
+    <section class="block">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <div class="box is-two-thirds">
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <h2>Aim:</h2>
+                                <p>The search algorithm aims to achieve two goals. Firstly, the search algorithm will
+                                    match you to the bank that best fits your desired requirements depending on your
+                                    answers to our form. Secondly the results aim to show that in some cases just
+                                    because a bank is one of the best rated for a particular service that you may desire
+                                    does not mean that it is the best option for you. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    <hr style="border-top: 2px solid #808080">
+    <br><br>
+
+    <section class="block">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <div class="box is-two-thirds">
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <h2>How does it work?</h2>
+                                <p>The first step is to answer the questions on the form when you start the process.
+                                    Please read the questions carefully and if you are unsure on the terminology used
+                                    or why a question may be important then please refer to our guides and terminology
+                                    dictionary to increase your understanding. The more you understand what is being
+                                    asked, the more accurate the results will be.</p>
+
+                                <p>The algorithm takes your answers and compares them with all the banks in our dataset.
+                                    The comparison is literal meaning if you select no for an option then the algorithm
+                                    will define a match when a bank <b>does not</b> contain this feature. In a case where the feature does is neither essential nor unwanted please select NA (Not applicable) so that this feature is not used in any comparisons. Again, this is to ensure the most accurate results can be produced. Based on the number of matches that your answers get with a bank a match percentage is created.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    <hr style="border-top: 2px solid #808080">
+    <br><br>
+
+    <section class="block">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <div class="box is-two-thirds">
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <h2>Results:</h2>
+
+                                <p>The results are displayed in two tables. The first of the tables displays the banks
+                                    that are top rated in the service that you desire. These are the banks that are
+                                    deemed to be the best for a particular product that they offer. The results display
+                                    a brief overview of the key features of that product, your match percentage to that
+                                    bank and the hyperlink to that bank can be accessed by clicking on the bank name.</p>
+
+                                <p>The second table displays the top three banks that returned the best match to you
+                                    regardless of the top rated service. This table displays the same information
+                                    however no overview is provided since it is a general match and not to a specific product.</p>
+
+                                <p>An explanation of your results is provided above these tables to help you understand the results produced.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    <hr style="border-top: 2px solid #808080">
+    <br><br>
+
+    <section class="block">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <div class="box is-two-thirds">
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <h2>What to do next?</h2>
+
+                                <p>Now that you have your results from the search algorithm we recommend that you use
+                                    the hyperlinks to be redirected to the bank's homepage to enable you to do your own
+                                    further research. The percentage should act as a guideline on where to start your
+                                    own research to enable your final decision to be made on which bank you think is
+                                    best for you. If when browsing a bank's site you are unsure on what aspects to
+                                    investigate or if some terminology is unfamiliar then please use the terminology
+                                    dictionary and guides to assist you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

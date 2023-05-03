@@ -12,3 +12,8 @@ def choosing_a_bank():
 @blueprint.route('/terminology')
 def terminology():
     return render_template('terminology.html')
+
+
+@blueprint.route('/search_overview')
+def search_overview():
+    return render_template('search_overview.html')
