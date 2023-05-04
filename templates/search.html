@@ -42,7 +42,7 @@
           <label for="current_account_yes">Yes</label>
           <input type="radio" id="current_account_no" name="current_account" value="no">
           <label for="current_account_no">No</label>
-            <input type="radio" id="current_account_na" name="current_account" value="na">
+            <input type="radio" id="current_account_na" name="current_account" value="na" checked>
           <label for="current_account_na">NA</label>
           <br><br>
 
@@ -52,7 +52,7 @@
           <label for="savings_account_yes">Yes</label>
           <input type="radio" id="savings_account_no" name="savings_account" value="no">
           <label for="savings_account_no">No</label>
-            <input type="radio" id="savings_account_na" name="savings_account" value="na">
+            <input type="radio" id="savings_account_na" name="savings_account" value="na" checked>
           <label for="savings_account_na">NA</label>
           <br><br>
 
@@ -62,7 +62,7 @@
           <label for="credit_card_yes">Yes</label>
           <input type="radio" id="credit_card_no" name="credit_card" value="no">
           <label for="credit_card_no">No</label>
-            <input type="radio" id="credit_card_na" name="credit_card" value="na">
+            <input type="radio" id="credit_card_na" name="credit_card" value="na" checked>
           <label for="credit_card_na">NA</label>
           <br><br>
 
@@ -72,7 +72,7 @@
           <label for="isa_yes">Yes</label>
           <input type="radio" id="isa_no" name="isa" value="no">
           <label for="isa_no">No</label>
-          <input type="radio" id="isa_na" name="isa" value="na">
+          <input type="radio" id="isa_na" name="isa" value="na" checked>
           <label for="isa_na">NA</label>
           <br><br>
 
@@ -82,7 +82,7 @@
           <label for="mortgage_yes">Yes</label>
           <input type="radio" id="mortgage_no" name="mortgage" value="no">
           <label for="mortgage_no">No</label>
-          <input type="radio" id="mortgage_na" name="mortgage" value="na">
+          <input type="radio" id="mortgage_na" name="mortgage" value="na" checked>
           <label for="mortgage_na">NA</label>
           <br><br>
 
@@ -101,7 +101,7 @@
 
             <label for="withdrawalLimit">Maximum ATM withdraw limit:</label>
             <br>
-            <input type="radio" id="limit300" name="withdrawalLimit" value="300">
+            <input type="radio" id="limit300" name="withdrawalLimit" value="300" checked>
             <label for="limit300">300</label>
             <br>
             <input type="radio" id="limit400" name="withdrawalLimit" value="400">
@@ -116,7 +116,7 @@
             <label for="online_yes">Yes</label  >
             <input type="radio" id="online_no" name="online_services" value="no">
             <label for="online_no">No</label>
-            <input type="radio" id="online_na" name="online_services" value="na">
+            <input type="radio" id="online_na" name="online_services" value="na" checked>
             <label for="online_na">NA</label>
             <br><br>
             <label for="mobile services">Mobile Services?</label>
@@ -125,7 +125,7 @@
             <label for="mobile_yes">Yes</label  >
             <input type="radio" id="mobile_no" name="mobile_services" value="no">
             <label for="mobile_no">No</label>
-            <input type="radio" id="mobile_na" name="mobile_services" value="na">
+            <input type="radio" id="mobile_na" name="mobile_services" value="na" checked>
             <label for="mobile_na">NA</label>
             <br><br>
             <label for="joint_accounts">Joint Accounts?</label>
@@ -134,7 +134,7 @@
             <label for="joint_yes">Yes</label  >
             <input type="radio" id="joint_no" name="joint_accounts" value="no">
             <label for="joint_no">No</label>
-            <input type="radio" id="joint_na" name="joint_accounts" value="na">
+            <input type="radio" id="joint_na" name="joint_accounts" value="na" checked>
             <label for="joint_na">NA</label>
             <br><br>
             <label for="child_accounts">Child Accounts?</label>
@@ -143,7 +143,7 @@
             <label for="child_yes">Yes</label  >
             <input type="radio" id="child_no" name="child_accounts" value="no">
             <label for="child_no">No</label>
-            <input type="radio" id="child_na" name="child_accounts" value="na">
+            <input type="radio" id="child_na" name="child_accounts" value="na" checked>
             <label for="child_na">NA</label>
             <br><br>
             <br><br>
@@ -152,12 +152,13 @@
             <hr style="border-top: 2px solid #808080">
 
             <h1 style="font-weight: bold;">Application Features</h1>
+            <p><I>If you have selected 'No' for mobile services this section will not be included when running the algorithm.</I></p>
             <br><br>
             <label for="freezeCard">Freeze debit card in app?</label>
             <br>
             <input type="radio" id="freezeYes" name="freezeCard" value="yes">
             <label for="freezeYes">Yes</label>
-            <input type="radio" id="freezeNo" name="freezeCard" value="no">
+            <input type="radio" id="freezeNo" name="freezeCard" value="no" checked>
             <label for="freezeNo">No</label>
 
             <br><br>
@@ -166,7 +167,7 @@
             <br>
             <input type="radio" id="instantYes" name="instantNotifications" value="yes">
             <label for="instantYes">Yes</label>
-            <input type="radio" id="instantNo" name="instantNotifications" value="no">
+            <input type="radio" id="instantNo" name="instantNotifications" value="no" checked>
             <label for="instantNo">No</label>
 
             <br><br>
@@ -175,7 +176,7 @@
             <br>
             <input type="radio" id="spendingCategoriesYes" name="spendingCategories" value="yes">
             <label for="spendingCategoriesYes">Yes</label>
-            <input type="radio" id="spendingCategoriesNo" name="spendingCategories" value="no">
+            <input type="radio" id="spendingCategoriesNo" name="spendingCategories" value="no" checked>
             <label for="spendingCategoriesNo">No</label>
 
             <br><br>
@@ -184,7 +185,7 @@
             <br>
             <input type="radio" id="turnOffYes" name="turnOffSpending" value="yes">
             <label for="turnOffYes">Yes</label>
-            <input type="radio" id="turnOffNo" name="turnOffSpending" value="no">
+            <input type="radio" id="turnOffNo" name="turnOffSpending" value="no" checked>
             <label for="turnOffNo">No</label>
 
             <br><br>
@@ -193,7 +194,7 @@
             <br>
             <input type="radio" id="goalsYes" name="spendingGoals" value="yes">
             <label for="goalsYes">Yes</label>
-            <input type="radio" id="goalsNo" name="spendingGoals" value="no">
+            <input type="radio" id="goalsNo" name="spendingGoals" value="no" checked>
             <label for="goalsNo">No</label>
 
             <br><br>
@@ -205,7 +206,7 @@
                 <div class="grid-container">
                   <div>
                     <label>
-                      <input type="radio" name="service" value="Top sign up cash">
+                      <input type="radio" name="service" value="Top sign up cash" checked>
                       Top sign up cash
                     </label>
                   </div>
@@ -301,7 +302,7 @@
                 <br>
                 <div class="grid-container-2">
                     <div>
-                        <input type="radio" id="overall" name="reputation" value="Overall">
+                        <input type="radio" id="overall" name="reputation" value="Overall" checked>
                         <label for="overall">Overall</label>
                     </div>
                     <div>
@@ -329,11 +330,11 @@
             </style>
 
             <hr style="border-top: 2px solid #808080">
-            <label for="esg_rating" style="font-weight: bold;">Are the ESG ratings of the banks important to you?</label>
+            <label for="esg_rating" style="font-weight: bold;">Are the ESG (Environmental, Social and Governance rating)ratings of the banks important to you?</label>
             <br><br>
             <input type="radio" id="esg_rating_yes" name="esg_rating" value="yes">
             <label for="esg_rating_yes">Yes</label>
-            <input type="radio" id="esg_rating_no" name="esg_rating" value="no">
+            <input type="radio" id="esg_rating_no" name="esg_rating" value="no" checked>
             <label for="esg_rating_no">No</label>
             <br>
             <hr style="border-top: 2px solid #808080">
@@ -342,5 +343,6 @@
         </form>
       </body>
     </html>
+
 
 {% endblock %}
