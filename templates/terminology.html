@@ -6,8 +6,8 @@
         max-width: 800px;
         margin: 80px auto 20px;
     }
-    .definition {
-        margin-bottom: 10px;
+    .definition, .search-definition {
+        margin-bottom: 60px;
     }
     .term {
         font-weight: bold;
@@ -37,6 +37,7 @@
         color: #999;
     }
 
+
 </style>
 
 <script>
@@ -65,6 +66,7 @@
                     const matchingDefinition = document.createElement("div");
                     matchingDefinition.innerHTML = definitions[i].innerHTML;
                     matchingDefinition.style.display = "block";
+                    matchingDefinition.classList.add("search-definition");
                     searchResults.appendChild(matchingDefinition);
                     // no match, return no display
                 } else {
@@ -98,79 +100,60 @@
         <div class="definition">
             <span class="term">ATM:</span> Automated Teller Machine. Places where you can withdraw cash without having to visit a bank's physical branches.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Bank:</span> A business used to protect money for its consumers. Banks are intermediates between those loaning money and those borrowing money to and from the institution respectively.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Cashback:</span> A reward system that enables the consumer to earn a percentage of what they spend back when shopping.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Child Account:</span> Just like a regular current or savings account, however often with restrictions and/or parental control. They aim to help children understand money management and can be used for higher education savings.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Credit Card:</span> A card that is provided by your bank enabling the instantaneous borrowing of money up to an amount. This is provided with the assurance that you will repay what you owe at a future date. The repayment normally includes interest.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Current Account:</span> An account to store and withdraw your money. This account lets you manage your day-to-day spending. Banks often offer a variety of different current accounts all offering a slightly different product.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">ESG Rating:</span> Environmental, Social and Governance rating. A rating designed to measure a company's focus and direction in regard to environmental, social and governance risks currently present in our lives.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Existing Customer Savings:</span> In order to open up this type of savings account you must already hold an account with that bank.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Interest:</span> Money that is paid for the use of money lent or for a delayed repayment. The rate can be fixed or variable, however will be stated before entering the agreement.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">ISA:</span> An Individual Savings Account. This is like a savings account however offers tax-free interest payments. There is an annual restriction on the amount of money one can invest that year.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Joint Account:</span> An account where more than one person is responsible for the finances within it.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Mortgages:</span> A loan used to help you buy or manage real estate. The loan is secured by the property itself meaning a fail of payment means the lender can take the real estate. The loans come with interest rates to be repaid.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Open to All Savings:</span> Anyone is able to open a savings account even if you do not already hold an account with the bank.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Overdraft:</span> An overdraft occurs when you withdraw more money than is present in your bank account. It is a form of debt and is repayable on demand. Banks offer a certain amount that your account can be overdrawn.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Packages:</span> A packaged account that comes as a normal bank account along with added extras. These extras might consist of travel insurance and loans.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Prepaid Accounts:</span> These are accounts for children where parents are able to add to and monitor the account. The assurance of this card is once no money is in the account, no money can be spent. They aim to teach children about banking in safety before they open an account of their own.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Premium Bank Accounts:</span> These accounts require a monthly fee in return for better services. These services might consist of retail discounts and breakdown cover. Similar to packaged bank accounts.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Retail Bank:</span> A bank that offers services to the general public, including individuals and small businesses. Retail banks offer services such as current accounts, savings accounts, loans, mortgages, etc.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Savings Account:</span> A deposit account designed for holding the money which you don’t plan on spending immediately. The number of withdrawals and/or transactions are often limited. In return for limited access to your finances, an interest rate is provided on your finances.
         </div>
-        <br><br><br>
         <div class="definition">
             <span class="term">Sign Up Cash:</span> When closing and opening new current accounts, the new bank may offer you a reward for making the change. The bank you are switching to must be a different bank.
         </div>
