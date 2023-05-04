@@ -59,7 +59,12 @@
                                 <p>Start by following one of the links below:</p>
                                 <div class="buttons is-centered">
                                     <a href="{{ url_for('blueprints.choosing_a_bank') }}" class="button is-primary is-medium is-outlined">Guide</a>
-                                    <a href="{{ url_for('search_algorithm.search_home') }}" class="button is-primary is-medium is-outlined">Search Algorithm</a>
+                                    <a href="{{ url_for('search_algorithm.search_home') }}" class="button is-primary is-medium is-outlined">
+                                      <span class="icon">
+                                        <i class="fas fa-search"></i>
+                                      </span>
+                                      <span>Find Your Bank</span>
+                                    </a>
                                     <a href="{{ url_for('blueprints.about') }}" class="button is-primary is-medium is-outlined">About Us</a>
                                 </div>
                                 </div>
