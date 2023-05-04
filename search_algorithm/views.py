@@ -344,11 +344,19 @@ def results(current_account, savings_account, credit_card, isa, mortgage, branch
         # Sort the banks and their scores based on the match percentage
         sorted_banks_and_scores = sorted(banks_and_scores, key=lambda x: x[1], reverse=True)
 
+        # convert number of branches to text for use on html template
+        if branches == 0:
+            branches_text = 'Low'
+        elif branches == 500:
+            branches_text = 'Medium'
+        else:
+            branches_text = 'High'
+
         return render_template('results.html', sorted_banks_and_scores=sorted_banks_and_scores,
                                sorted_banks_and_scores_services=sorted_banks_and_scores_services,
                                current_account=current_account, savings_account=savings_account,
                                credit_card=credit_card, isa=isa, mortgage=mortgage,
-                               branches=branches, withdrawalLimit=withdrawalLimit,
+                               branches=branches_text, withdrawalLimit=withdrawalLimit,
                                online_services=online_services, mobile_services=mobile_services,
                                joint_accounts=joint_accounts, child_accounts=child_accounts,
                                freeze_card=freeze_card, instant_notifications=instant_notifications,
