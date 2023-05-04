@@ -249,35 +249,22 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
             # Calculate match percentage
             match_percentage = (match_score / total_score) * 100
 
+            # create a fraction using the banks reputation and the average reputation for scaling match percentage
             if reputation == 'Overall':
-                if int(bank_tuple['overall_service']) > 62 and match_percentage < 95:
-                    match_percentage = match_percentage + 5
-                elif int(bank_tuple['overall_service']) < 62:
-                    match_percentage = match_percentage - 5
+                match_percentage = match_percentage + (int(bank_tuple['overall_service']) / 62)
 
             if reputation == 'Online':
-                if int(bank_tuple['online_service']) > 73 and match_percentage < 95:
-                    match_percentage = match_percentage + 5
-                elif int(bank_tuple['online_service']) < 73:
-                    match_percentage = match_percentage - 5
+                match_percentage = match_percentage + (int(bank_tuple['online_service']) / 73)
 
             if reputation == 'Overdraft':
-                if int(bank_tuple['overdraft_service']) > 60 and match_percentage < 95:
-                    match_percentage = match_percentage + 5
-                elif int(bank_tuple['overdraft_service']) < 60:
-                    match_percentage = match_percentage - 5
+                match_percentage = match_percentage + (int(bank_tuple['overdraft_service'])/60)
 
             if reputation == 'Branch':
-                if int(bank_tuple['branch_service']) > 62 and match_percentage < 95:
-                    match_percentage = match_percentage + 5
-                elif int(bank_tuple['branch_service']) < 62:
-                    match_percentage = match_percentage - 5
+                match_percentage = match_percentage + (int(bank_tuple['branch_service'])/61)
 
             if esg == 'yes':
-                if int(bank_tuple['esg_rating']) > 17 and match_percentage < 95:
-                    match_percentage = match_percentage + 5
-                elif int(bank_tuple['esg_rating']) < 17:
-                    match_percentage = match_percentage - 5
+                match_percentage = match_percentage + ((int(bank_tuple['esg_rating'])/17)*6)
+
 
             # Append the match percentage to the list
             match_percentages.append(match_percentage)
