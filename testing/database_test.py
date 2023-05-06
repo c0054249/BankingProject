@@ -18,7 +18,7 @@ class TestReturnDatabase(unittest.TestCase):
         self.connection.close()
         self.app_context.pop()
 
-    # test case where mobile services are not required and count = 1
+    # test case where mobile services are required and count = 1
     def test_return_database_with_mobile_services_and_count_1(self):
         result = return_database('yes', 'Overdraft', 1)
         expected_query = text(
