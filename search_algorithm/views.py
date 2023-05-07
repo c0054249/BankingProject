@@ -251,20 +251,19 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 
             # create a fraction using the banks reputation and the average reputation for scaling match percentage
             if reputation == 'Overall':
-                match_percentage = match_percentage + (int(bank_tuple['overall_service']) / 62)
+                match_percentage = match_percentage * (int(bank_tuple['overall_service']) / 62)
 
             if reputation == 'Online':
-                match_percentage = match_percentage + (int(bank_tuple['online_service']) / 73)
+                match_percentage = match_percentage * (int(bank_tuple['online_service']) / 73)
 
             if reputation == 'Overdraft':
-                match_percentage = match_percentage + (int(bank_tuple['overdraft_service'])/60)
+                match_percentage = match_percentage * (int(bank_tuple['overdraft_service'])/60)
 
             if reputation == 'Branch':
-                match_percentage = match_percentage + (int(bank_tuple['branch_service'])/61)
+                match_percentage = match_percentage * (int(bank_tuple['branch_service'])/61)
 
             if esg == 'yes':
-                match_percentage = match_percentage + ((int(bank_tuple['esg_rating'])/17)*6)
-
+                match_percentage = match_percentage + (int(bank_tuple['esg_rating'])/17)
 
             # Append the match percentage to the list
             match_percentages.append(match_percentage)
