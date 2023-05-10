@@ -100,7 +100,8 @@ def return_database(mobile_services, service, count):
                 # else the user does not need to query this data
                 # doing this stops returning unnecessary data
                 if mobile_services == 'yes':
-                    query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+                    query = text(
+                        "SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
                 else:
                     query = text("SELECT * FROM banks")
 
@@ -141,7 +142,6 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
                                withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
                                freeze_card, instant_notifications, spending_categories, turn_off_spending,
                                spending_goals, reputation, esg):
-
     if not isinstance(banks_data, list):
         return []
 
@@ -250,20 +250,40 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
             match_percentage = (match_score / total_score) * 100
 
             # create a fraction using the banks reputation and the average reputation for scaling match percentage
+            # map this fraction to be between 0.9 and 1.1 and then multiply by the match percentage to scale
             if reputation == 'Overall':
-                match_percentage = match_percentage * (int(bank_tuple['overall_service']) / 62)
+                if (int(bank_tuple['overall_service']) / 62) >= 1:
+                    match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['overall_service']) / 62) - 1))
+                else:
+                    match_percentage = match_percentage * (0.9 + 0.1 * ((int(bank_tuple['overall_service']) / 62) - 1))
 
             if reputation == 'Online':
-                match_percentage = match_percentage * (int(bank_tuple['online_service']) / 73)
+                if (int(bank_tuple['online_service']) / 73) >= 1:
+                    match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['online_service']) / 73) - 1))
+                else:
+                    match_percentage = match_percentage * (0.9 + 0.1 * ((int(bank_tuple['online_service']) / 73) - 1))
 
             if reputation == 'Overdraft':
-                match_percentage = match_percentage * (int(bank_tuple['overdraft_service'])/60)
+                if (int(bank_tuple['overdraft_service']) / 60) >= 1:
+                    match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['overdraft_service']) / 60) - 1))
+                else:
+                    match_percentage = match_percentage * (
+                                0.9 + 0.1 * ((int(bank_tuple['overdraft_service']) / 60) - 1))
 
             if reputation == 'Branch':
-                match_percentage = match_percentage * (int(bank_tuple['branch_service'])/61)
+                if (int(bank_tuple['branch_service']) / 61) >= 1:
+                    match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['branch_service']) / 61) - 1))
+                else:
+                    match_percentage = match_percentage * (0.9 + 0.1 * ((int(bank_tuple['branch_service']) / 61) - 1))
 
             if esg == 'yes':
-                match_percentage = match_percentage + (int(bank_tuple['esg_rating'])/17)
+                if (int(bank_tuple['esg_rating']) / 17) >= 1:
+                    match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['esg_rating']) / 17) - 1))
+                else:
+                    match_percentage = match_percentage * (0.9 + 0.1 * ((int(bank_tuple['esg_rating']) / 17) - 1))
+
+            if match_percentage > 100:
+                match_percentage = 100
 
             # Append the match percentage to the list
             match_percentages.append(match_percentage)
@@ -278,7 +298,6 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
             instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation, esg):
-
     try:
         # run the functions so that is calculating a match percentage but taking the service they require as a priority
         count = 0
