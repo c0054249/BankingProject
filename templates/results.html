@@ -40,7 +40,7 @@
                             {% set first_bank_overall = sorted_banks_and_scores[0] %}
 
                             {% if first_bank_services[1] < first_bank_overall[1] %}
-                                <p>Looking at the results, we can see that for the services you want,
+                                <p>Looking at the results, it can be seen that for the services you want,
                                     <a href="{{ first_bank_services[0].hyperlink }}"><strong>{{ first_bank_services[0].bank_name }}</strong></a>
                                     is the best option for you with a
                                     <strong>{{ "%.2f"|format(first_bank_services[1]) }}</strong> percentage match.
