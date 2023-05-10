@@ -32,7 +32,7 @@ class TestReturnDatabase(unittest.TestCase):
     # test case where mobile services are not required and count = 1
     def test_return_database_without_mobile_services_and_count_1(self):
         result = return_database('no', 'Overdraft', 1)
-        expected_query = text("SELECT * FROM banks")
+        expected_query = text("SELECT*FROMbanks")
         expected_result = self.connection.execute(expected_query)
         expected_rows = expected_result.fetchall()
         expected_keys = expected_result.keys()
@@ -42,10 +42,10 @@ class TestReturnDatabase(unittest.TestCase):
     # test case where mobile services are required and count = 0
     def test_return_database_with_mobile_services_and_count_not_1(self):
         result = return_database('yes', 'Overdraft', 0)
-        expected_query = text("SELECT * FROM banks b "
-                              "JOIN application_features af ON b.id=af.bank_id "
-                              "JOIN top_rated tr ON b.id=tr.bank_id "
-                              "WHERE tr.service=:service")
+        expected_query = text("SELECT*FROMbanksb"
+                              "JOINapplication_featuresafONb.id=af.bank_id"
+                              "JOINtop_ratedtrONb.id=tr.bank_id"
+                              "WHEREtr.service=:service")
         expected_query = expected_query.bindparams(service='Overdraft')
         expected_result = self.connection.execute(expected_query)
         expected_rows = expected_result.fetchall()
@@ -56,9 +56,9 @@ class TestReturnDatabase(unittest.TestCase):
     # test case where mobile services are not required and count = 0
     def test_return_database_without_mobile_services_and_count_not_1(self):
         result = return_database('no', 'Overdraft', 0)
-        expected_query = text("SELECT * FROM banks b "
-                              "JOIN top_rated tr ON b.id=tr.bank_id "
-                              "WHERE tr.service=:service")
+        expected_query = text("SELECT*FROMbanksb"
+                              "JOINtop_ratedtrONb.id=tr.bank_id"
+                              "WHEREtr.service=:service")
         expected_query = expected_query.bindparams(service='Overdraft')
         expected_result = self.connection.execute(expected_query)
         expected_rows = expected_result.fetchall()

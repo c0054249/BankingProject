@@ -100,8 +100,7 @@ def return_database(mobile_services, service, count):
                 # else the user does not need to query this data
                 # doing this stops returning unnecessary data
                 if mobile_services == 'yes':
-                    query = text(
-                        "SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
+                    query = text("SELECT * FROM banks JOIN application_features ON banks.id = application_features.bank_id")
                 else:
                     query = text("SELECT * FROM banks")
 
@@ -142,6 +141,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
                                withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts,
                                freeze_card, instant_notifications, spending_categories, turn_off_spending,
                                spending_goals, reputation, esg):
+
     if not isinstance(banks_data, list):
         return []
 
@@ -268,7 +268,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
                     match_percentage = match_percentage * (1 + 0.1 * ((int(bank_tuple['overdraft_service']) / 60) - 1))
                 else:
                     match_percentage = match_percentage * (
-                                0.9 + 0.1 * ((int(bank_tuple['overdraft_service']) / 60) - 1))
+                            0.9 + 0.1 * ((int(bank_tuple['overdraft_service']) / 60) - 1))
 
             if reputation == 'Branch':
                 if (int(bank_tuple['branch_service']) / 61) >= 1:
@@ -298,6 +298,7 @@ def calculate_match_percentage(banks_data, current_account, savings_account, cre
 def results(current_account, savings_account, credit_card, isa, mortgage, branches,
             withdrawalLimit, online_services, mobile_services, joint_accounts, child_accounts, freeze_card,
             instant_notifications, spending_categories, turn_off_spending, spending_goals, service, reputation, esg):
+
     try:
         # run the functions so that is calculating a match percentage but taking the service they require as a priority
         count = 0

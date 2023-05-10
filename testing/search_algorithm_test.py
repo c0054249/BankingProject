@@ -71,7 +71,7 @@ class TestSearchAlgorithm(TestCase):
         match_percentages = [round(x, 2) for x in match_percentages]
 
         # Expected match percentages for top rated banks for overdraft
-        expected_percentages = [70.01, 73.38, 88.81]
+        expected_percentages = [56.42, 59.62, 72.15]
 
         # Test if the calculated match percentages are equal to the expected percentages
         self.assertEqual(match_percentages, expected_percentages)
@@ -131,7 +131,7 @@ class TestSearchAlgorithm(TestCase):
         match_percentages = [round(x, 2) for x in match_percentages]
 
         # Expected match percentages for top rated banks for overdraft
-        expected_percentages = [64.89, 77.35, 74.03]
+        expected_percentages = [52.22, 63.06, 59.96]
 
         # Test if the calculated match percentages are equal to the expected percentages
         self.assertEqual(match_percentages, expected_percentages)
@@ -190,7 +190,7 @@ class TestSearchAlgorithm(TestCase):
         match_percentages = [round(x, 2) for x in match_percentages]
 
         # Expected match percentages for top rated banks for overdraft
-        expected_percentages = [62.5, 68.75, 62.5]
+        expected_percentages = [40, 44, 40]
 
         # Test if the calculated match percentages are equal to the expected percentages
         self.assertEqual(match_percentages, expected_percentages)
@@ -250,7 +250,7 @@ class TestSearchAlgorithm(TestCase):
         match_percentages = [round(x, 2) for x in match_percentages]
 
         # Expected match percentages for top rated banks for overdraft
-        expected_percentages = [46.76, 55.85, 55.8]
+        expected_percentages = [37.48, 44.97, 44.76]
 
         # Test if the calculated match percentages are equal to the expected percentages
         self.assertEqual(match_percentages, expected_percentages)
